@@ -9,7 +9,7 @@
       <v-btn text to="/competitions">Competitions</v-btn>
       <v-btn text to="/about">About</v-btn>
       <v-btn text to="/login">Login/Register</v-btn>
-
+      <v-btn text to="/cart"> Cart ({{ $cartCount }}) </v-btn>
     </v-app-bar>
 
     <!-- Main Content Area -->
@@ -20,24 +20,19 @@
 </template>
 
 <script>
-import { createApp } from 'vue';
-import router from './router';
-import { createVuetify } from 'vuetify';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 import 'vuetify/styles';
 
 // Vuetify instance
-const vuetify = createVuetify();
 
 export default {
   name: 'App',
   setup() {
-    const app = createApp({
-      name: 'App',
-    });
+    const cartCount = computed(() => useStore().getters.cartCount);
 
-    app.use(vuetify);
-    app.use(router);
-    app.mount('#app');
+    return { cartCount };
+
   },
 };
 </script>
