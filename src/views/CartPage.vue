@@ -20,8 +20,6 @@
   export default {
     setup() {
       const store = useStore(); // Ensure store is being accessed here
-      console.log("test");
-      console.log(store);
   
       // Access the getters from Vuex
       const cartItems = computed(() => store.getters.cartItems);
