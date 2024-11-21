@@ -11,9 +11,7 @@
   
       <h3>Payment Details</h3>
       <v-form>
-        <!-- Stripe Element for card input -->
         <div id="card-element">
-          <!-- A Stripe Element will be inserted here. -->
         </div>
       </v-form>
   
@@ -44,7 +42,7 @@
                 },
             },
         };
-      // Step 1: Initialize Stripe Elements
+
       onMounted(() => {
         stripe = window.Stripe('pk_test_51QNgjNABrqpmR6Y5a7Ak0AX1nED13vitWIDuY4irZhnQ5DhqtI3CxZCQEJvJe724qHAXrA7uNeE6fzUAOSm6LMy400LA3zLZ8u');
         elements = stripe.elements();
@@ -52,19 +50,17 @@
             style: cardStyle,
             hidePostalCode: true, // Disable the postal code field
         });      
-        cardElement.mount('#card-element'); // Mount the card element inside the div with id 'card-element'
+        cardElement.mount('#card-element'); 
       });
   
       const completePurchase = async () => {
         try {
-          // Step 2: Create a payment intent by calling the backend
           const response = await axios.post('http://127.0.0.1:8000/api/payment-intent', {
             amount: cartTotal.value * 100, // amount in cents
           });
   
           const clientSecret = response.data.clientSecret;
   
-          // Step 3: Confirm payment with Stripe
           const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
               card: cardElement,
