@@ -11,10 +11,10 @@
   
       <h3>Payment Details</h3>
       <v-form>
-        <v-text-field label="Card Number" v-model="cardDetails.number" />
-        <v-text-field label="Cardholder Name" v-model="cardDetails.name" />
-        <v-text-field label="Expiry Date (MM/YY)" v-model="cardDetails.expiry" />
-        <v-text-field label="CVV" v-model="cardDetails.cvv" type="password" />
+        <!-- Stripe Element for card input -->
+        <div id="card-element">
+          <!-- A Stripe Element will be inserted here. -->
+        </div>
       </v-form>
   
       <v-btn color="primary" @click="completePurchase">Complete Purchase</v-btn>
@@ -22,7 +22,7 @@
   </template>
   
   <script>
-  import { computed, reactive } from 'vue';
+  import { computed, onMounted } from 'vue';
   import { useStore } from 'vuex';
   import axios from 'axios';
   
@@ -32,34 +32,44 @@
       const cartItems = computed(() => store.getters.cartItems);
       const cartTotal = computed(() => store.getters.cartTotal);
   
-      const cardDetails = reactive({
-        number: '',
-        name: '',
-        expiry: '',
-        cvv: ''
+      let stripe;
+      let elements;
+      let cardElement;
+
+        const cardStyle = {
+            style: {
+                base: {
+                    fontSize: '16px',
+                    color: '#32325d',
+                },
+            },
+        };
+      // Step 1: Initialize Stripe Elements
+      onMounted(() => {
+        stripe = window.Stripe('pk_test_51QNgjNABrqpmR6Y5a7Ak0AX1nED13vitWIDuY4irZhnQ5DhqtI3CxZCQEJvJe724qHAXrA7uNeE6fzUAOSm6LMy400LA3zLZ8u');
+        elements = stripe.elements();
+        cardElement = elements.create('card', {
+            style: cardStyle,
+            hidePostalCode: true, // Disable the postal code field
+        });      
+        cardElement.mount('#card-element'); // Mount the card element inside the div with id 'card-element'
       });
   
       const completePurchase = async () => {
         try {
-          // Step 1: Create a payment intent by calling the backend
+          // Step 2: Create a payment intent by calling the backend
           const response = await axios.post('http://127.0.0.1:8000/api/payment-intent', {
             amount: cartTotal.value * 100, // amount in cents
           });
   
           const clientSecret = response.data.clientSecret;
   
-          // Step 2: Confirm payment with Stripe
-          const stripe = window.Stripe('ypk_test_51QNgjNABrqpmR6Y5a7Ak0AX1nED13vitWIDuY4irZhnQ5DhqtI3CxZCQEJvJe724qHAXrA7uNeE6fzUAOSm6LMy400LA3zLZ8u')  
+          // Step 3: Confirm payment with Stripe
           const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
-              card: {
-                number: cardDetails.number,
-                exp_month: cardDetails.expiry.split('/')[0],
-                exp_year: '20' + cardDetails.expiry.split('/')[1],
-                cvc: cardDetails.cvv
-              },
+              card: cardElement,
               billing_details: {
-                name: cardDetails.name
+                name: 'John Doe' // You can get this from a form field or user data
               }
             }
           });
@@ -69,7 +79,7 @@
             return;
           }
   
-          // Step 3: If payment is successful, send order details to backend
+          // Step 4: If payment is successful, send order details to backend
           if (paymentIntent.status === 'succeeded') {
             const orderResponse = await axios.post('http://127.0.0.1:8000/api/orders', {
               cart: cartItems.value,
@@ -88,8 +98,19 @@
         }
       };
   
-      return { cartItems, cartTotal, cardDetails, completePurchase };
+      return { cartItems, cartTotal, completePurchase };
     }
   };
   </script>
+  
+  <style scoped>
+  /* Optional styling for the card element */
+  #card-element {
+    width: 100%;
+    height: 40px;
+    background: #f7f7f7;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  </style>
   
