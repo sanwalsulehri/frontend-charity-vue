@@ -5,6 +5,7 @@ import LoginPage from './views/LoginPage.vue';
 import CompetitionsPage from './views/CompetitionsPage.vue';
 import CompetitionDetailPage from './views/CompetitionDetailPage.vue';
 import CartPage from './views/CartPage.vue';
+import CheckoutPage from './views/CheckoutPage.vue';
 
 
 import AdminPanel from './views/AdminPanel.vue';
@@ -24,6 +25,7 @@ const routes = [
   { path: '/login', component: LoginPage },
   { path: '/competitions', component: CompetitionsPage },
   { path: '/cart', component: CartPage },
+  { path: '/checkout', component: CheckoutPage },
   {
     path: '/ccadmin',
     name: 'AdminPanel',

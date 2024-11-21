@@ -15,11 +15,13 @@
   
   <script>
   import { computed } from 'vue';
+  import { useRouter } from 'vue-router';
   import { useStore } from 'vuex';
   
   export default {
     setup() {
       const store = useStore(); // Ensure store is being accessed here
+      const router = useRouter();
   
       // Access the getters from Vuex
       const cartItems = computed(() => store.getters.cartItems);
@@ -33,8 +35,7 @@
         store.commit('removeFromCart', competitionId);
       };
       const checkout = () => {
-        store.commit('clearCart');
-        // Additional checkout logic if needed
+        router.push('/checkout'); // Redirect to the checkout page
       };
   
       return { cartItems, cartTotal, updateCart, removeFromCart, checkout };

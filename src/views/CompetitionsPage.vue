@@ -1,6 +1,5 @@
 <template>
     <v-container>
-        <p>test</p>
       <v-row>
         <v-col v-for="competition in competitions" :key="competition.id" cols="12" sm="6" md="4">
           <v-card>
