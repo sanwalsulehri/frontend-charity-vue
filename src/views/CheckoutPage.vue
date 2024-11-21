@@ -21,7 +21,6 @@
     </v-container>
   </template>
   
-  <script src="https://js.stripe.com/v3/"></script>
   <script>
   import { computed, reactive } from 'vue';
   import { useStore } from 'vuex';
@@ -29,34 +28,65 @@
   
   export default {
     setup() {
-        const store = useStore();
-
-        const cartItems = computed(() => store.getters.cartItems);
-        const cartTotal = computed(() => store.getters.cartTotal);
-
-        // Placeholder for payment details
-        const cardDetails = reactive({
+      const store = useStore();
+      const cartItems = computed(() => store.getters.cartItems);
+      const cartTotal = computed(() => store.getters.cartTotal);
+  
+      const cardDetails = reactive({
         number: '',
         name: '',
         expiry: '',
         cvv: ''
-        });
+      });
   
-        const completePurchase = async () => {
-            try {
-                const response = await axios.post('http://127.0.0.1:8000/api/orders', {
-                    cart: cartItems.value,
-                });
-
-                store.commit('clearCart');
-                alert('Purchase completed successfully!');
-                console.log(response.data);
-            } catch (error) {
-                console.error('Error completing purchase:', error);
-                alert('Failed to complete purchase. Please try again.');
+      const completePurchase = async () => {
+        try {
+          // Step 1: Create a payment intent by calling the backend
+          const response = await axios.post('http://127.0.0.1:8000/api/payment-intent', {
+            amount: cartTotal.value * 100, // amount in cents
+          });
+  
+          const clientSecret = response.data.clientSecret;
+  
+          // Step 2: Confirm payment with Stripe
+          const stripe = window.Stripe('ypk_test_51QNgjNABrqpmR6Y5a7Ak0AX1nED13vitWIDuY4irZhnQ5DhqtI3CxZCQEJvJe724qHAXrA7uNeE6fzUAOSm6LMy400LA3zLZ8u')  
+          const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+              card: {
+                number: cardDetails.number,
+                exp_month: cardDetails.expiry.split('/')[0],
+                exp_year: '20' + cardDetails.expiry.split('/')[1],
+                cvc: cardDetails.cvv
+              },
+              billing_details: {
+                name: cardDetails.name
+              }
             }
-        };
-
+          });
+  
+          if (error) {
+            alert(error.message);
+            return;
+          }
+  
+          // Step 3: If payment is successful, send order details to backend
+          if (paymentIntent.status === 'succeeded') {
+            const orderResponse = await axios.post('http://127.0.0.1:8000/api/orders', {
+              cart: cartItems.value,
+              paymentIntentId: paymentIntent.id,
+            });
+  
+            store.commit('clearCart');
+            alert('Purchase completed successfully!');
+            console.log(orderResponse.data);
+          } else {
+            alert('Payment failed. Please try again.');
+          }
+        } catch (error) {
+          console.error('Error completing purchase:', error);
+          alert('Failed to complete purchase. Please try again.');
+        }
+      };
   
       return { cartItems, cartTotal, cardDetails, completePurchase };
     }
