@@ -48,7 +48,7 @@
         elements = stripe.elements();
         cardElement = elements.create('card', {
             style: cardStyle,
-            hidePostalCode: true, // Disable the postal code field
+            hidePostalCode: true,
         });      
         cardElement.mount('#card-element'); 
       });
@@ -56,7 +56,7 @@
       const completePurchase = async () => {
         try {
           const response = await axios.post('http://127.0.0.1:8000/api/payment-intent', {
-            amount: cartTotal.value * 100, // amount in cents
+            amount: cartTotal.value * 100,
           });
   
           const clientSecret = response.data.clientSecret;

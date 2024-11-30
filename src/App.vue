@@ -8,8 +8,13 @@
       <v-btn text to="/">Home</v-btn>
       <v-btn text to="/competitions">Competitions</v-btn>
       <v-btn text to="/about">About</v-btn>
-      <v-btn text to="/login">Login/Register</v-btn>
-      <v-btn text to="/cart"> Cart ({{ $cartCount }}) </v-btn>
+      
+      <!-- Dynamically switch between 'Login/Register' and 'My Account' -->
+      <v-btn text :to="isLoggedIn ? '/user' : '/login'">
+        {{ isLoggedIn ? 'My Account' : 'Login/Register' }}
+      </v-btn>
+      
+      <v-btn text to="/cart">Cart ({{ cartCount }})</v-btn>
     </v-app-bar>
 
     <!-- Main Content Area -->
@@ -20,23 +25,25 @@
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
-import 'vuetify/styles';
-
-// Vuetify instance
 
 export default {
   name: 'App',
   setup() {
-    const cartCount = computed(() => useStore().getters.cartCount);
+    const store = useStore();
+    const cartCount = computed(() => store.getters.cartCount); // Get cart count
+    const isLoggedIn = computed(() => store.getters.isLoggedIn); // Get login status
 
-    return { cartCount };
+    // Ensure login status is updated when the app is initialized
+    onMounted(() => {
+      store.dispatch('updateLoginStatus');
+    });
 
+    return {
+      cartCount,
+      isLoggedIn,
+    };
   },
 };
 </script>
-
-<style>
-/* Optional: global styles */
-</style>
