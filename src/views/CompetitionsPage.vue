@@ -30,9 +30,9 @@
       };
     },
     methods: {
-        getImagePath(image) {
-            return require(`@/assets/${image}`);
-        },
+      getImagePath(image) {
+        return `http://127.0.0.1:8000/storage/${image}`;
+      },
       async fetchCompetitions() {
         try {
           const response = await axios.get('http://127.0.0.1:8000/api/competitions');

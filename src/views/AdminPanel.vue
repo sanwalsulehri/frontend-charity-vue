@@ -13,9 +13,30 @@
           label="Status"
           required
         />
-        <v-text-field v-model="competition.image_location" label="Image URL (optional)" />
-        <v-text-field v-model="competition.ticket_pool" label="Ticket Pool" type="number" required />
-        <v-text-field v-model="competition.ticket_price" label="Ticket Price" type="number" required />
+
+        <!-- Image Upload -->
+        <div class="mt-4">
+          <label for="image-upload">Upload Competition Image</label>
+          <input
+            id="image-upload"
+            type="file"
+            accept="image/*"
+            @change="handleFileUpload"
+          />
+        </div>
+
+        <v-text-field
+          v-model="competition.ticket_pool"
+          label="Ticket Pool"
+          type="number"
+          required
+        />
+        <v-text-field
+          v-model="competition.ticket_price"
+          label="Ticket Price"
+          type="number"
+          required
+        />
 
         <!-- Dynamic Instant Win Input -->
         <div class="mt-4">
@@ -62,10 +83,12 @@ export default {
       name: "",
       description: "",
       status: "live",
-      image_location: "",
+      image_location: "", // Full path to the uploaded image
       ticket_pool: 0,
       ticket_price: 0,
     });
+
+    const imageFile = ref(null); // Hold the uploaded image file
 
     // Define state for instant wins
     const instantWins = ref([{ win_amount: 0, quantity: 0 }]);
@@ -89,6 +112,14 @@ export default {
       }
     };
 
+    // Handle file upload
+    const handleFileUpload = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        imageFile.value = file;
+      }
+    };
+
     // Add a new instant win row
     const addInstantWinRow = () => {
       instantWins.value.push({ win_amount: 0, quantity: 0 });
@@ -99,22 +130,45 @@ export default {
       instantWins.value.splice(index, 1);
     };
 
-    // Add competition
+    // Upload image and add competition
     const addCompetition = async () => {
+      if (!imageFile.value) {
+        alert("Please upload an image.");
+        return;
+      }
+
       isSubmitting.value = true;
 
-      // Convert instantWins to key-value format
-      const formattedInstantWins = instantWins.value.reduce((acc, win) => {
-        const { win_amount, quantity } = win;
-        if (win_amount > 0 && quantity > 0) {
-          acc[win_amount] = quantity;
-        }
-        return acc;
-      }, {});
-
       try {
+        // Step 1: Upload the image
+        const formData = new FormData();
+        formData.append("image", imageFile.value);
+
+        const uploadResponse = await axios.post(
+          "http://127.0.0.1:8000/api/upload-image",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        // Extract the uploaded image's full path
+        const { path } = uploadResponse.data;
+
+        // Step 2: Submit competition data with the image's path
+        const formattedInstantWins = instantWins.value.reduce((acc, win) => {
+          const { win_amount, quantity } = win;
+          if (win_amount > 0 && quantity > 0) {
+            acc[win_amount] = quantity;
+          }
+          return acc;
+        }, {});
+
         await axios.post("http://127.0.0.1:8000/api/competitions", {
           ...competition.value,
+          image_location: path, // Use the uploaded image's path
           instant_wins: formattedInstantWins,
         });
 
@@ -128,6 +182,7 @@ export default {
           ticket_price: 0,
         };
         instantWins.value = [{ win_amount: 0, quantity: 0 }];
+        imageFile.value = null;
       } catch (error) {
         console.error("Error adding competition:", error);
         alert("Failed to add competition. Please try again.");
@@ -146,6 +201,8 @@ export default {
       instantWins,
       isLoading,
       isSubmitting,
+      imageFile,
+      handleFileUpload,
       addInstantWinRow,
       removeInstantWinRow,
       addCompetition,

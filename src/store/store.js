@@ -9,7 +9,7 @@ const store = createStore({
   },
   mutations: {
     addToCart(state, { competitionId, competitionName, ticketPrice, quantity }) {
-      quantity = parseInt(quantity, 10); // or parseFloat if it's a decimal value
+      quantity = parseInt(quantity, 10); 
 
       const existingItem = state.cart.find(item => item.competitionId === competitionId);
       if (existingItem) {
