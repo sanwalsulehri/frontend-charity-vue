@@ -31,11 +31,11 @@
     },
     methods: {
       getImagePath(image) {
-        return `http://127.0.0.1:8000/storage/${image}`;
+        return `${process.env.VUE_APP_API_URL}/storage/${image}`;
       },
       async fetchCompetitions() {
         try {
-          const response = await axios.get('http://127.0.0.1:8000/api/competitions');
+          const response = await axios.get(`${process.env.VUE_APP_API_URL}/api/competitions`);
           this.competitions = response.data;
         } catch (error) {
           console.error("Error fetching competitions:", error);

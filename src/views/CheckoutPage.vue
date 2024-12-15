@@ -55,7 +55,7 @@
   
       const completePurchase = async () => {
         try {
-          const response = await axios.post('http://127.0.0.1:8000/api/payment-intent', {
+          const response = await axios.post(`${process.env.VUE_APP_API_URL}/api/payment-intent`, {
             amount: cartTotal.value * 100,
           });
   
@@ -77,7 +77,7 @@
   
           // Step 4: If payment is successful, send order details to backend
           if (paymentIntent.status === 'succeeded') {
-            const orderResponse = await axios.post('http://127.0.0.1:8000/api/orders', {
+            const orderResponse = await axios.post(`${process.env.VUE_APP_API_URL}/api/orders`, {
               cart: cartItems.value,
               paymentIntentId: paymentIntent.id,
             });

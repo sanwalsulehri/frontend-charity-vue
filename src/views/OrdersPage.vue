@@ -39,7 +39,7 @@
     },
     methods: {
       fetchOrders() {
-        axios.get('http://127.0.0.1:8000/api/user/orders')
+        axios.get(`${process.env.VUE_APP_API_URL}/api/user/orders`)
           .then(response => {
             this.orders = response.data;
             this.loading = false;

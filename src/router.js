@@ -41,7 +41,7 @@ const routes = [
     ],
     beforeEnter: async (to, from, next) => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/user-role', {
+            const response = await axios.get(`${process.env.VUE_APP_API_URL}/api/user-role`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('authToken')}`,
                 }

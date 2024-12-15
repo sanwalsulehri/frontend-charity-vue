@@ -74,7 +74,7 @@
         isSubmitting.value = true;
         try {
           const { name, email, password } = form.value;
-          await axios.post("http://127.0.0.1:8000/api/register", {
+          await axios.post(`${process.env.VUE_APP_API_URL}/api/register`, {
             name,
             email,
             password,
@@ -95,7 +95,7 @@
         isSubmitting.value = true;
         try {
           const { email, password } = form.value;
-          const { data } = await axios.post("http://127.0.0.1:8000/api/login", {
+          const { data } = await axios.post(`${process.env.VUE_APP_API_URL}/api/login`, {
             email,
             password,
           });

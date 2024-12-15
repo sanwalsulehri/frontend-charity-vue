@@ -125,7 +125,7 @@ export default {
 
     const checkAdmin = async () => {
       try {
-        await axios.get("http://127.0.0.1:8000/api/user-role");
+        await axios.get(`${process.env.VUE_APP_API_URL}/api/user-role`);
         isLoading.value = false;
       } catch (error) {
         if (error.response?.status === 401) {
@@ -165,7 +165,7 @@ export default {
         formData.append("image", imageFile.value);
 
         const uploadResponse = await axios.post(
-          "http://127.0.0.1:8000/api/upload-image",
+          `${process.env.VUE_APP_API_URL}/api/upload-image`,
           formData,
           {
             headers: {
@@ -183,7 +183,7 @@ export default {
           return acc;
         }, {});
 
-        await axios.post("http://127.0.0.1:8000/api/competitions", {
+        await axios.post(`${process.env.VUE_APP_API_URL}api/competitions`, {
           ...competition.value,
           image_location: path, 
           instant_wins: formattedInstantWins,

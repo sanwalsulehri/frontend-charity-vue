@@ -48,7 +48,7 @@
       // Fetch users from the API
       const fetchUsers = async () => {
         try {
-          const response = await axios.get("http://127.0.0.1:8000/api/users");
+          const response = await axios.get(`${process.env.VUE_APP_API_URL}api/users`);
           users.value = response.data;
         } catch (error) {
           console.error("Failed to fetch users:", error);

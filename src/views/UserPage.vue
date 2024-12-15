@@ -114,7 +114,7 @@ export default {
   methods: {
     fetchUserProfile() {
       axios
-        .get('http://127.0.0.1:8000/api/user/profile')
+        .get(`${process.env.VUE_APP_API_URL}/api/user/profile`)
         .then((response) => {
           this.user = response.data;
         })
@@ -127,7 +127,7 @@ export default {
     },
     saveProfile() {
       axios
-        .put('http://127.0.0.1:8000/api/user/profile', this.user)
+        .put(`${process.env.VUE_APP_API_URL}/api/user/profile`, this.user)
         .then(() => {
           this.editing = false;
           alert('Profile updated successfully');

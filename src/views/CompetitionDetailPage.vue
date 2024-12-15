@@ -29,7 +29,7 @@
     },
     methods: {
         addToCart() {
-        const competition = this.competition; // Assuming competition data is fetched here
+        const competition = this.competition;
         this.$store.commit('addToCart', {
             competitionId: competition.id,
             competitionName: competition.name,
@@ -39,14 +39,14 @@
     },
       async fetchCompetition() {
         try {
-          const response = await axios.get(`http://127.0.0.1:8000/api/competition/${this.$route.params.id}`);
+          const response = await axios.get(`${process.env.VUE_APP_API_URL}/api/competition/${this.$route.params.id}`);
           this.competition = response.data;
         } catch (error) {
           console.error("Error fetching competition details:", error);
         }
       },
       getImagePath(image) {
-        return `http://127.0.0.1:8000/storage/${image}`;
+        return `${process.env.VUE_APP_API_URL}/storage/${image}`;
       }
     },
     mounted() {
