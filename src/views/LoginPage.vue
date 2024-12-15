@@ -4,6 +4,11 @@
       <v-form v-if="isRegistering" @submit.prevent="register">
         <v-text-field v-model="form.name" label="Name" :rules="[rules.required]" required />
         <v-text-field v-model="form.email" label="Email" :rules="[rules.required, rules.email]" required />
+        <v-text-field v-model="form.street_address" label="Street Address" :rules="[rules.required, ]" required />
+        <v-text-field v-model="form.town_city" label="Town/city" :rules="[rules.required, ]" required />
+        <v-text-field v-model="form.postcode" label="Postcode" :rules="[rules.required, ]" required />
+        <v-text-field v-model="form.phone" label="Phone" :rules="[rules.required, ]" required />
+
         <v-text-field
           v-model="form.password"
           label="Password"
@@ -48,6 +53,10 @@
       const form = ref({
         name: "",
         email: "",
+        street_address: "",
+        town_city: "",
+        postcode: "",
+        phone: "",
         password: "",
         confirmPassword: "",
       });
@@ -73,11 +82,15 @@
   
         isSubmitting.value = true;
         try {
-          const { name, email, password } = form.value;
+          const { name, email, street_address, town_city, postcode, phone, password} = form.value;
           await axios.post(`${process.env.VUE_APP_API_URL}/api/register`, {
             name,
             email,
             password,
+            street_address,
+            town_city,
+            postcode,
+            phone
           });
   
           alert("Registration successful!");
