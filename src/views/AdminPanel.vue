@@ -1,69 +1,96 @@
 <template>
   <v-container>
-    <!-- Loading state or admin panel content -->
     <div v-if="isLoading">Checking admin status...</div>
     <div v-else>
-      <v-form @submit.prevent="addCompetition">
-        <!-- Competition Fields -->
-        <v-text-field v-model="competition.name" label="Competition Name" required />
-        <v-textarea v-model="competition.description" label="Description" required />
-        <v-select
-          v-model="competition.status"
-          :items="['live', 'closed', 'drawn']"
-          label="Status"
-          required
-        />
+      <v-row>
+        <!-- Side Panel -->
+        <v-col cols="12" md="3">
+          <v-navigation-drawer app>
+            <v-list>
+              <v-list-item @click="showCompetitions" v-bind:class="{'v-list-item--active': activeSection === 'competitions'}">
+                <v-list-item-title>Competitions</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="showUsers" v-bind:class="{'v-list-item--active': activeSection === 'users'}">
+                <v-list-item-title>Users</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-navigation-drawer>
+        </v-col>
 
-        <!-- Image Upload -->
-        <div class="mt-4">
-          <label for="image-upload">Upload Competition Image</label>
-          <input
-            id="image-upload"
-            type="file"
-            accept="image/*"
-            @change="handleFileUpload"
-          />
-        </div>
+        <!-- Content Section -->
+        <v-col cols="12" md="9">
+          <v-row>
+            <v-col>
+              <v-btn @click="isAdminPanel = true">Admin Panel</v-btn>
+            </v-col>
+          </v-row>
 
-        <v-text-field
-          v-model="competition.ticket_pool"
-          label="Ticket Pool"
-          type="number"
-          required
-        />
-        <v-text-field
-          v-model="competition.ticket_price"
-          label="Ticket Price"
-          type="number"
-          required
-        />
+          <!-- Competitions Section -->
+          <div v-if="activeSection === 'competitions'">
+            <v-form @submit.prevent="addCompetition">
+              <v-text-field v-model="competition.name" label="Competition Name" required />
+              <v-textarea v-model="competition.description" label="Description" required />
+              <v-select
+                v-model="competition.status"
+                :items="['live', 'closed', 'drawn']"
+                label="Status"
+                required
+              />
 
-        <!-- Dynamic Instant Win Input -->
-        <div class="mt-4">
-          <h3>Instant Wins</h3>
-          <div v-for="(win, index) in instantWins" :key="index" class="d-flex align-center">
-            <v-text-field
-              v-model.number="win.win_amount"
-              label="Win Amount"
-              type="number"
-              class="mr-2"
-              required
-            />
-            <v-text-field
-              v-model.number="win.quantity"
-              label="Quantity"
-              type="number"
-              class="mr-2"
-              required
-            />
-            <v-btn color="error" @click="removeInstantWinRow(index)">Remove</v-btn>
+              <div class="mt-4">
+                <label for="image-upload">Upload Competition Image</label>
+                <input
+                  id="image-upload"
+                  type="file"
+                  accept="image/*"
+                  @change="handleFileUpload"
+                />
+              </div>
+
+              <v-text-field
+                v-model="competition.ticket_pool"
+                label="Ticket Pool"
+                type="number"
+                required
+              />
+              <v-text-field
+                v-model="competition.ticket_price"
+                label="Ticket Price"
+                type="number"
+                required
+              />
+
+              <div class="mt-4">
+                <h3>Instant Wins</h3>
+                <div v-for="(win, index) in instantWins" :key="index" class="d-flex align-center">
+                  <v-text-field
+                    v-model.number="win.win_amount"
+                    label="Win Amount"
+                    type="number"
+                    class="mr-2"
+                    required
+                  />
+                  <v-text-field
+                    v-model.number="win.quantity"
+                    label="Quantity"
+                    type="number"
+                    class="mr-2"
+                    required
+                  />
+                  <v-btn color="error" @click="removeInstantWinRow(index)">Remove</v-btn>
+                </div>
+                <v-btn color="primary" @click="addInstantWinRow" class="mt-2">Add Instant Win</v-btn>
+              </div>
+              <v-btn color="primary" type="submit" :disabled="isSubmitting">Add Competition</v-btn>
+            </v-form>
           </div>
-          <v-btn color="primary" @click="addInstantWinRow" class="mt-2">Add Instant Win</v-btn>
-        </div>
 
-        <!-- Submit Button -->
-        <v-btn color="primary" type="submit" :disabled="isSubmitting">Add Competition</v-btn>
-      </v-form>
+          <!-- Users Section -->
+          <div v-if="activeSection === 'users'">
+            <users-list />
+          </div>
+        </v-col>
+      </v-row>
     </div>
   </v-container>
 </template>
@@ -72,32 +99,30 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
+import UsersList from "@/components/UsersList.vue";  // Import the UsersList component
 
 export default {
   name: "AdminPanel",
+  components: {
+    UsersList,  // Register the UsersList component
+  },
   setup() {
     const router = useRouter();
-
-    // Define form state for competition creation
     const competition = ref({
       name: "",
       description: "",
       status: "live",
-      image_location: "", // Full path to the uploaded image
+      image_location: "", 
       ticket_pool: 0,
       ticket_price: 0,
     });
-
-    const imageFile = ref(null); // Hold the uploaded image file
-
-    // Define state for instant wins
+    const imageFile = ref(null); 
     const instantWins = ref([{ win_amount: 0, quantity: 0 }]);
 
-    // Loading and submission state
     const isLoading = ref(true);
     const isSubmitting = ref(false);
+    const activeSection = ref("competitions");  // Default section is 'competitions'
 
-    // Check if user is an admin
     const checkAdmin = async () => {
       try {
         await axios.get("http://127.0.0.1:8000/api/user-role");
@@ -112,7 +137,6 @@ export default {
       }
     };
 
-    // Handle file upload
     const handleFileUpload = (event) => {
       const file = event.target.files[0];
       if (file) {
@@ -120,17 +144,14 @@ export default {
       }
     };
 
-    // Add a new instant win row
     const addInstantWinRow = () => {
       instantWins.value.push({ win_amount: 0, quantity: 0 });
     };
 
-    // Remove an instant win row
     const removeInstantWinRow = (index) => {
       instantWins.value.splice(index, 1);
     };
 
-    // Upload image and add competition
     const addCompetition = async () => {
       if (!imageFile.value) {
         alert("Please upload an image.");
@@ -140,7 +161,6 @@ export default {
       isSubmitting.value = true;
 
       try {
-        // Step 1: Upload the image
         const formData = new FormData();
         formData.append("image", imageFile.value);
 
@@ -154,10 +174,7 @@ export default {
           }
         );
 
-        // Extract the uploaded image's full path
         const { path } = uploadResponse.data;
-
-        // Step 2: Submit competition data with the image's path
         const formattedInstantWins = instantWins.value.reduce((acc, win) => {
           const { win_amount, quantity } = win;
           if (win_amount > 0 && quantity > 0) {
@@ -168,7 +185,7 @@ export default {
 
         await axios.post("http://127.0.0.1:8000/api/competitions", {
           ...competition.value,
-          image_location: path, // Use the uploaded image's path
+          image_location: path, 
           instant_wins: formattedInstantWins,
         });
 
@@ -191,7 +208,14 @@ export default {
       }
     };
 
-    // Call checkAdmin on component mount
+    const showCompetitions = () => {
+      activeSection.value = "competitions";  // Switch to competitions section
+    };
+
+    const showUsers = () => {
+      activeSection.value = "users";  // Switch to users section
+    };
+
     onMounted(() => {
       checkAdmin();
     });
@@ -206,11 +230,16 @@ export default {
       addInstantWinRow,
       removeInstantWinRow,
       addCompetition,
+      activeSection,
+      showCompetitions,
+      showUsers,
     };
   },
 };
 </script>
 
 <style scoped>
-/* Optional styling */
+.v-list-item--active {
+  background-color: #f0f0f0;
+}
 </style>

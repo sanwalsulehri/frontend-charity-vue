@@ -8,6 +8,7 @@ import CartPage from './views/CartPage.vue';
 import CheckoutPage from './views/CheckoutPage.vue';
 import UserPage from './views/UserPage.vue';
 import AdminPanel from './views/AdminPanel.vue';
+import UserProfileAdmin from '@/components/UserProfileAdmin.vue';
 import axios from "axios";
 
 
@@ -31,6 +32,13 @@ const routes = [
     path: '/ccadmin',
     name: 'AdminPanel',
     component: AdminPanel,
+    children: [
+      {
+        path: 'user/:id',
+        component: UserProfileAdmin,
+        props: true, 
+      },
+    ],
     beforeEnter: async (to, from, next) => {
         try {
             const response = await axios.get('http://127.0.0.1:8000/api/user-role', {
