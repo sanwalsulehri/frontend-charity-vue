@@ -183,7 +183,7 @@ export default {
           return acc;
         }, {});
 
-        await axios.post(`${process.env.VUE_APP_API_URL}api/competitions`, {
+        await axios.post(`${process.env.VUE_APP_API_URL}/api/competitions`, {
           ...competition.value,
           image_location: path, 
           instant_wins: formattedInstantWins,
