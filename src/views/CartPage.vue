@@ -1,17 +1,32 @@
 <template>
-    <v-container>
-      <h2>Your Cart</h2>
-      <v-row v-for="item in cartItems" :key="item.competitionId">
-        <v-col>
-          <p>{{ item.competitionName }} - £{{ item.ticketPrice }} each</p>
-          <v-text-field v-model="item.quantity" type="number" label="Quantity" @input="updateCart(item)" />
-          <v-btn @click="removeFromCart(item.competitionId)">Remove</v-btn>
-        </v-col>
-      </v-row>
-      <p>Total: £{{ cartTotal }}</p>
-      <v-btn color="primary" @click="checkout">Checkout</v-btn>
-    </v-container>
-  </template>
+  <v-container>
+    <h2>Your Cart</h2>
+    <v-row
+      v-for="item in cartItems"
+      :key="item.competitionId"
+    >
+      <v-col>
+        <p>{{ item.competitionName }} - £{{ item.ticketPrice }} each</p>
+        <v-text-field
+          v-model="item.quantity"
+          type="number"
+          label="Quantity"
+          @input="updateCart(item)"
+        />
+        <v-btn @click="removeFromCart(item.competitionId)">
+          Remove
+        </v-btn>
+      </v-col>
+    </v-row>
+    <p>Total: £{{ cartTotal }}</p>
+    <v-btn
+      color="primary"
+      @click="checkout"
+    >
+      Checkout
+    </v-btn>
+  </v-container>
+</template>
   
   <script>
   import { computed } from 'vue';

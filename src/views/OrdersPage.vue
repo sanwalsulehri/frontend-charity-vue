@@ -1,22 +1,27 @@
 <template>
-    <v-card>
-      <v-card-title>Recent Orders</v-card-title>
-      <v-data-table
-        :headers="headers"
-        :items="orders"
-        item-key="id"
-        :loading="loading"
-        class="elevation-1 custom-table"
+  <v-card>
+    <v-card-title>Recent Orders</v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="orders"
+      item-key="id"
+      :loading="loading"
+      class="elevation-1 custom-table"
     >
-        <template v-slot:[`item.status`]="{ item }">
-          <v-chip :color="getStatusColor(item.status)" dark>{{ item.status }}</v-chip>
-        </template>
-        <template v-slot:[`item.created_at`]="{ item }">
-          <span>{{ formatDate(item.created_at) }}</span>
-        </template>
-      </v-data-table>
-    </v-card>
-  </template>
+      <template #[`item.status`]="{ item }">
+        <v-chip
+          :color="getStatusColor(item.status)"
+          dark
+        >
+          {{ item.status }}
+        </v-chip>
+      </template>
+      <template #[`item.created_at`]="{ item }">
+        <span>{{ formatDate(item.created_at) }}</span>
+      </template>
+    </v-data-table>
+  </v-card>
+</template>
   
   <script>
   import axios from 'axios';

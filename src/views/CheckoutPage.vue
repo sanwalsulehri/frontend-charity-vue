@@ -1,23 +1,30 @@
 <template>
-    <v-container>
-      <h2>Checkout</h2>
-      <v-row v-for="item in cartItems" :key="item.competitionId">
-        <v-col>
-          <p>{{ item.competitionName }} - £{{ item.ticketPrice }} each</p>
-          <p>Quantity: {{ item.quantity }}</p>
-        </v-col>
-      </v-row>
-      <p>Total: £{{ cartTotal }}</p>
+  <v-container>
+    <h2>Checkout</h2>
+    <v-row
+      v-for="item in cartItems"
+      :key="item.competitionId"
+    >
+      <v-col>
+        <p>{{ item.competitionName }} - £{{ item.ticketPrice }} each</p>
+        <p>Quantity: {{ item.quantity }}</p>
+      </v-col>
+    </v-row>
+    <p>Total: £{{ cartTotal }}</p>
   
-      <h3>Payment Details</h3>
-      <v-form>
-        <div id="card-element">
-        </div>
-      </v-form>
+    <h3>Payment Details</h3>
+    <v-form>
+      <div id="card-element" />
+    </v-form>
   
-      <v-btn color="primary" @click="completePurchase">Complete Purchase</v-btn>
-    </v-container>
-  </template>
+    <v-btn
+      color="primary"
+      @click="completePurchase"
+    >
+      Complete Purchase
+    </v-btn>
+  </v-container>
+</template>
   
   <script>
   import { computed, onMounted } from 'vue';

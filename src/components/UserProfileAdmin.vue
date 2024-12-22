@@ -1,38 +1,80 @@
 <template>
-    <v-container>
-      <v-row>
-        <v-col cols="12">
-          <v-card class="elevation-1">
-            <v-card-title>User Profile</v-card-title>
-            <v-card-text>
-              <v-form>
-                <v-row>
-                  <v-col cols="12" md="6">
-                    <v-text-field label="Name" :value="userProfile.name" readonly />
-                  </v-col>
-                  <v-col cols="12" md="6">
-                    <v-text-field label="Email" :value="userProfile.email" readonly />
-                  </v-col>
-                  <v-col cols="12" md="6">
-                    <v-text-field label="Street Address" :value="userProfile.street_address" readonly />
-                  </v-col>
-                  <v-col cols="12" md="6">
-                    <v-text-field label="Town/City" :value="userProfile.town_city" readonly />
-                  </v-col>
-                  <v-col cols="12" md="6">
-                    <v-text-field label="Postcode" :value="userProfile.postcode" readonly />
-                  </v-col>
-                  <v-col cols="12" md="6">
-                    <v-text-field label="Phone" :value="userProfile.phone" readonly />
-                  </v-col>
-                </v-row>
-              </v-form>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </template>
+  <v-container>
+    <v-row>
+      <v-col cols="12">
+        <v-card class="elevation-1">
+          <v-card-title>User Profile</v-card-title>
+          <v-card-text>
+            <v-form>
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="6"
+                >
+                  <v-text-field
+                    label="Name"
+                    :value="userProfile.name"
+                    readonly
+                  />
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="6"
+                >
+                  <v-text-field
+                    label="Email"
+                    :value="userProfile.email"
+                    readonly
+                  />
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="6"
+                >
+                  <v-text-field
+                    label="Street Address"
+                    :value="userProfile.street_address"
+                    readonly
+                  />
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="6"
+                >
+                  <v-text-field
+                    label="Town/City"
+                    :value="userProfile.town_city"
+                    readonly
+                  />
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="6"
+                >
+                  <v-text-field
+                    label="Postcode"
+                    :value="userProfile.postcode"
+                    readonly
+                  />
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="6"
+                >
+                  <v-text-field
+                    label="Phone"
+                    :value="userProfile.phone"
+                    readonly
+                  />
+                </v-col>
+              </v-row>
+            </v-form>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
   
   <script>
   import { ref, watch } from "vue";

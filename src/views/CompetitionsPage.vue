@@ -1,23 +1,38 @@
 <template>
-    <v-container>
-      <v-row>
-        <v-col v-for="competition in competitions" :key="competition.id" cols="12" sm="6" md="4">
-          <v-card>
-            <v-img :src=getImagePath(competition.image_location) alt="Competition Image" height="200px" />
-            <v-card-title>{{ competition.name }}</v-card-title>
-            <v-card-subtitle>{{ competition.description }}</v-card-subtitle>
-            <v-card-text>
-              <div>Ticket Price: £{{ competition.ticket_price || 'N/A' }}</div>
-              <div>Status: {{ competition.status }}</div>
-            </v-card-text>
-            <v-card-actions>
-              <v-btn color="primary" @click="viewCompetition(competition.id)">View Competition</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </template>
+  <v-container>
+    <v-row>
+      <v-col
+        v-for="competition in competitions"
+        :key="competition.id"
+        cols="12"
+        sm="6"
+        md="4"
+      >
+        <v-card>
+          <v-img
+            :src="getImagePath(competition.image_location)"
+            alt="Competition Image"
+            height="200px"
+          />
+          <v-card-title>{{ competition.name }}</v-card-title>
+          <v-card-subtitle>{{ competition.description }}</v-card-subtitle>
+          <v-card-text>
+            <div>Ticket Price: £{{ competition.ticket_price || 'N/A' }}</div>
+            <div>Status: {{ competition.status }}</div>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn
+              color="primary"
+              @click="viewCompetition(competition.id)"
+            >
+              View Competition
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
   
   <script>
   import axios from 'axios';
@@ -28,6 +43,9 @@
       return {
         competitions: []
       };
+    },
+    mounted() {
+      this.fetchCompetitions();
     },
     methods: {
       getImagePath(image) {
@@ -44,9 +62,6 @@
       viewCompetition(id) {
         this.$router.push(`/competition/${id}`);
       }
-    },
-    mounted() {
-      this.fetchCompetitions();
     }
   };
   </script>

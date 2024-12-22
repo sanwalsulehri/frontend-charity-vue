@@ -1,7 +1,10 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" md="3">
+      <v-col
+        cols="12"
+        md="3"
+      >
         <!-- Sidebar -->
         <v-navigation-drawer app>
           <v-list dense>
@@ -15,62 +18,83 @@
                 <v-list-item-title>Edit Profile</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item link @click="logout">
+            <v-list-item
+              link
+              @click="logout"
+            >
               <v-list-item-content>
                 <v-list-item-title>Logout</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-
           </v-list>
         </v-navigation-drawer>
       </v-col>
 
-      <v-col cols="12" md="9">
+      <v-col
+        cols="12"
+        md="9"
+      >
         <!-- Profile Information Section -->
         <v-card v-if="currentPage === 'profile'">
           <v-card-title>Edit Profile</v-card-title>
-          <v-form v-model="valid" ref="form">
+          <v-form
+            ref="form"
+            v-model="valid"
+          >
             <v-text-field
               v-model="user.name"
               label="Name"
               :rules="[rules.required]"
               :disabled="!editing"
-            ></v-text-field>
+            />
 
             <v-text-field
               v-model="user.email"
               label="Email"
               :rules="[rules.required, rules.email]"
               :disabled="!editing"
-            ></v-text-field>
+            />
 
             <v-text-field
               v-model="user.street_address"
               label="Street Address"
               :disabled="!editing"
-            ></v-text-field>
+            />
 
             <v-text-field
               v-model="user.town_city"
               label="Town/City"
               :disabled="!editing"
-            ></v-text-field>
+            />
 
             <v-text-field
               v-model="user.postcode"
               label="Postcode"
               :disabled="!editing"
-            ></v-text-field>
+            />
 
             <v-text-field
               v-model="user.phone"
               label="Phone"
               :disabled="!editing"
-            ></v-text-field>
+            />
 
             <!-- Edit/Save Buttons -->
-            <v-btn @click="toggleEdit" color="primary" v-if="!editing">Edit</v-btn>
-            <v-btn @click="saveProfile" color="success" :disabled="!valid" v-if="editing">Save</v-btn>
+            <v-btn
+              v-if="!editing"
+              color="primary"
+              @click="toggleEdit"
+            >
+              Edit
+            </v-btn>
+            <v-btn
+              v-if="editing"
+              color="success"
+              :disabled="!valid"
+              @click="saveProfile"
+            >
+              Save
+            </v-btn>
           </v-form>
         </v-card>
 
@@ -86,6 +110,9 @@ import axios from 'axios';
 import OrdersPage from './OrdersPage.vue';
 
 export default {
+  components: {
+    OrdersPage,
+  },
   data() {
     return {
       user: {
@@ -104,9 +131,6 @@ export default {
         email: (value) => /.+@.+\..+/.test(value) || 'E-mail must be valid.',
       },
     };
-  },
-  components: {
-    OrdersPage,
   },
   mounted() {
     this.fetchUserProfile();

@@ -1,20 +1,35 @@
 <template>
-    <v-container v-if="competition">
-      <v-card>
-        <v-img :src="getImagePath(competition.image_location)" alt="Competition Image" height="300px" />
-        <v-card-title>{{ competition.name }}</v-card-title>
-        <v-card-subtitle>{{ competition.description }}</v-card-subtitle>
-        <v-card-text>
-          <div>Status: {{ competition.status }}</div>
-          <div>Ticket Pool: {{ competition.ticket_pool }}</div>
-          <div>Ticket Price: £{{ competition.ticket_price }}</div>
-        </v-card-text>
-        <v-text-field v-model="quantity" label="Ticket Quantity" type="number" />
-        <v-btn color="primary" @click="addToCart">Add to Cart</v-btn>
-      </v-card>
-    </v-container>
-    <div v-else>Loading competition details...</div>
-  </template>
+  <v-container v-if="competition">
+    <v-card>
+      <v-img
+        :src="getImagePath(competition.image_location)"
+        alt="Competition Image"
+        height="300px"
+      />
+      <v-card-title>{{ competition.name }}</v-card-title>
+      <v-card-subtitle>{{ competition.description }}</v-card-subtitle>
+      <v-card-text>
+        <div>Status: {{ competition.status }}</div>
+        <div>Ticket Pool: {{ competition.ticket_pool }}</div>
+        <div>Ticket Price: £{{ competition.ticket_price }}</div>
+      </v-card-text>
+      <v-text-field
+        v-model="quantity"
+        label="Ticket Quantity"
+        type="number"
+      />
+      <v-btn
+        color="primary"
+        @click="addToCart"
+      >
+        Add to Cart
+      </v-btn>
+    </v-card>
+  </v-container>
+  <div v-else>
+    Loading competition details...
+  </div>
+</template>
   
   <script>
   import axios from 'axios';
@@ -26,6 +41,9 @@
         competition: null,
         quantity: 1
       };
+    },
+    mounted() {
+      this.fetchCompetition();
     },
     methods: {
         addToCart() {
@@ -48,9 +66,6 @@
       getImagePath(image) {
         return `${process.env.VUE_APP_API_URL}/storage/${image}`;
       }
-    },
-    mounted() {
-      this.fetchCompetition();
     }
   };
   </script>

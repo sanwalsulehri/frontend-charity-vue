@@ -1,16 +1,27 @@
 <template>
   <v-container>
-    <div v-if="isLoading">Checking admin status...</div>
+    <div v-if="isLoading">
+      Checking admin status...
+    </div>
     <div v-else>
       <v-row>
         <!-- Side Panel -->
-        <v-col cols="12" md="3">
+        <v-col
+          cols="12"
+          md="3"
+        >
           <v-navigation-drawer app>
             <v-list>
-              <v-list-item @click="showCompetitions" v-bind:class="{'v-list-item--active': activeSection === 'competitions'}">
+              <v-list-item
+                :class="{'v-list-item--active': activeSection === 'competitions'}"
+                @click="showCompetitions"
+              >
                 <v-list-item-title>Competitions</v-list-item-title>
               </v-list-item>
-              <v-list-item @click="showUsers" v-bind:class="{'v-list-item--active': activeSection === 'users'}">
+              <v-list-item
+                :class="{'v-list-item--active': activeSection === 'users'}"
+                @click="showUsers"
+              >
                 <v-list-item-title>Users</v-list-item-title>
               </v-list-item>
             </v-list>
@@ -18,18 +29,31 @@
         </v-col>
 
         <!-- Content Section -->
-        <v-col cols="12" md="9">
+        <v-col
+          cols="12"
+          md="9"
+        >
           <v-row>
             <v-col>
-              <v-btn @click="isAdminPanel = true">Admin Panel</v-btn>
+              <v-btn @click="isAdminPanel = true">
+                Admin Panel
+              </v-btn>
             </v-col>
           </v-row>
 
           <!-- Competitions Section -->
           <div v-if="activeSection === 'competitions'">
             <v-form @submit.prevent="addCompetition">
-              <v-text-field v-model="competition.name" label="Competition Name" required />
-              <v-textarea v-model="competition.description" label="Description" required />
+              <v-text-field
+                v-model="competition.name"
+                label="Competition Name"
+                required
+              />
+              <v-textarea
+                v-model="competition.description"
+                label="Description"
+                required
+              />
               <v-select
                 v-model="competition.status"
                 :items="['live', 'closed', 'drawn']"
@@ -44,7 +68,7 @@
                   type="file"
                   accept="image/*"
                   @change="handleFileUpload"
-                />
+                >
               </div>
 
               <v-text-field
@@ -62,7 +86,11 @@
 
               <div class="mt-4">
                 <h3>Instant Wins</h3>
-                <div v-for="(win, index) in instantWins" :key="index" class="d-flex align-center">
+                <div
+                  v-for="(win, index) in instantWins"
+                  :key="index"
+                  class="d-flex align-center"
+                >
                   <v-text-field
                     v-model.number="win.win_amount"
                     label="Win Amount"
@@ -77,11 +105,28 @@
                     class="mr-2"
                     required
                   />
-                  <v-btn color="error" @click="removeInstantWinRow(index)">Remove</v-btn>
+                  <v-btn
+                    color="error"
+                    @click="removeInstantWinRow(index)"
+                  >
+                    Remove
+                  </v-btn>
                 </div>
-                <v-btn color="primary" @click="addInstantWinRow" class="mt-2">Add Instant Win</v-btn>
+                <v-btn
+                  color="primary"
+                  class="mt-2"
+                  @click="addInstantWinRow"
+                >
+                  Add Instant Win
+                </v-btn>
               </div>
-              <v-btn color="primary" type="submit" :disabled="isSubmitting">Add Competition</v-btn>
+              <v-btn
+                color="primary"
+                type="submit"
+                :disabled="isSubmitting"
+              >
+                Add Competition
+              </v-btn>
             </v-form>
           </div>
 
