@@ -160,9 +160,9 @@
  import { Bars3Icon, BellIcon,ShoppingBagIcon, XMarkIcon } from '@heroicons/vue/24/outline'
  
  const navigation = [
-   { name: 'Home', href: '/', current: true },
-   { name: 'Competetions', href: '#', current: false },
-   { name: 'About', href: '#', current: false },
+  //  { name: 'Home', href: '/', current: true },
+  //  { name: 'Competetions', href: '#', current: false },
+  //  { name: 'About', href: '#', current: false },
  ]
  </script>
  
