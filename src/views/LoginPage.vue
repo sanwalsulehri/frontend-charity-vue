@@ -215,7 +215,7 @@
             <div>
               <label
                 for="email"
-                class="block text-sm/6 font-medium "
+                class="block  font-medium text-sm/6"
               >Email</label>
               <div class="mt-1.5">
                 <input
