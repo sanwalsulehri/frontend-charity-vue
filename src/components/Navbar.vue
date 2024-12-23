@@ -25,13 +25,13 @@
         </div>
         <div class="flex flex-1 items-center sm:items-stretch sm:justify-start">
           <div class="flex shrink-0 items-center">
-            <h1 class="font-semibold text-lg">
+            <h1 class="font-semibold sm:text-lg">
               CharityComps
             </h1>
           </div>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
-              <router-link
+              <a
                 v-for="item in navigation"
                 :key="item.name"
                 :href="item.href"
@@ -39,7 +39,7 @@
                 :aria-current="item.current ? 'page' : undefined"
               >
                 {{ item.name }}
-              </router-link>
+              </a>
             </div>
           </div>
         </div>
@@ -160,9 +160,9 @@
  import { Bars3Icon, BellIcon,ShoppingBagIcon, XMarkIcon } from '@heroicons/vue/24/outline'
  
  const navigation = [
-  //  { name: 'Home', href: '/', current: true },
-  //  { name: 'Competetions', href: '#', current: false },
-  //  { name: 'About', href: '#', current: false },
+   { name: 'Home', href: '/', current: true },
+   { name: 'Competetions', href: '/competitions', current: false },
+   { name: 'About', href: '/about', current: false },
  ]
  </script>
  
