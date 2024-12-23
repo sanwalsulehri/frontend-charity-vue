@@ -20,12 +20,12 @@
         <!-- Grid for Competitions -->
         <div
           v-if="competitions.length"
-          class="mt-12 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8"
+          class="mt-12 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-5"
         >
           <div
             v-for="competition in competitions"
             :key="competition.id"
-            class="group overflow-hidden relative transition-all duration-400 bg-[#101828]  rounded-lg ring-white/10 ring-[1px]"
+            class="group overflow-hidden relative transition-all duration-400 bg-[#101828] ring-[1px] ring-emerald-500 rounded-lg "
           >
             <div class="w-full h-fit overflow-hidden">
               <img
@@ -35,19 +35,27 @@
               />
             </div>
 
-            <div class="px-5 py-5 flex justify-between">
+            <div class="px-5 py-5 flex justify-between ]">
               <div>
-                <h1 class="text-xl  capitalize font-medium">{{ competition.name }}</h1>
-                <p class="mt-1 text-sm line-clamp-3">{{ competition.description }}</p>
+                <h1 class="text-xl  capitalize font-semibold">{{ competition.name }}</h1>
+                <p class="mt-1 text-sm text-gray-400 min-h-[60px] line-clamp-3">{{ competition.description }}</p>
                 <div class="mt-2 text-gray-200 flex items-center gap-1 font-medium">Status:
                   <div class="relative w-1.5 h-1.5 bg-green-500 rounded-full flex items-center justify-center">
                     <div class="h-1.5 w-1.5 bg-green-500 animate-ping rounded-full"></div>
                   </div>
                   {{ competition.status }}
                 </div>
+               
               </div>
-              <p class="font-medium">${{ competition.ticket_price || "N/A" }}</p>
+              <p class="font-semibold underline decoration-emerald-500 underline-offset-2">${{ competition.ticket_price || "N/A" }}</p>
+
             </div>
+            <button @click="viewCompetition(competition.id)"
+              type="button"
+              class="rounded-md  bg-emerald-500  w-[90%] mx-4 hover:bg-emerald-800 mt-[0px] mb-[10px] px-4 sm:px-8 py-2 font-semibold text-white shadow-sm "
+            >
+              Add to cart
+            </button>
           </div>
         </div>
 
