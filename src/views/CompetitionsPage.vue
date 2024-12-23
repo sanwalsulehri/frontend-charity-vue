@@ -37,7 +37,7 @@
 
             <div class="px-5 py-5 flex justify-between">
               <div>
-                <h1 class="text-xl font-medium capitalize">{{ competition.name }}</h1>
+                <h1 class="text-xl  capitalize font-medium">{{ competition.name }}</h1>
                 <p class="mt-1 text-sm line-clamp-3">{{ competition.description }}</p>
                 <div class="mt-2 text-gray-200 flex items-center gap-1 font-medium">Status:
                   <div class="relative w-1.5 h-1.5 bg-green-500 rounded-full flex items-center justify-center">
