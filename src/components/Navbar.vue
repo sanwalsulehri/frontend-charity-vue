@@ -25,9 +25,14 @@
         </div>
         <div class="flex flex-1 items-center sm:items-stretch sm:justify-start">
           <div class="flex shrink-0 items-center">
+            <a href="/">
+
             <h1 class="font-semibold sm:text-lg">
               CharityComps
             </h1>
+
+          </a>
+
           </div>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">

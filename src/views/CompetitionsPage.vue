@@ -72,13 +72,10 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 
-// Import Navbar Component
 import Navbar from "@/components/Navbar.vue";
 
-// Reactive state
 const competitions = ref([]);
 
-// Function to fetch competitions
 const fetchCompetitions = async () => {
   try {
     const response = await axios.get(`${process.env.VUE_APP_API_URL}/api/competitions`);
