@@ -17,9 +17,8 @@
 
     <div class="bg-transparent z-[999]" >
     <div class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
-      <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Shopping Cart</h1>
-      <form v-for="item in cartItems"
-      :key="item.competitionId"  class="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16" >
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl ">Shopping Cart</h1>
+      <form  class="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16" >
         <section aria-labelledby="cart-heading" class="lg:col-span-7">
           <h2 id="cart-heading" class="sr-only">Items in your shopping cart</h2>
 
@@ -80,7 +79,7 @@
 
         <!-- Order summary -->
         <section  aria-labelledby="summary-heading" class="mt-16 rounded-lg bg-white/5 backdrop-blur-3xl px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8">
-          <h2 id="summary-heading" class="text-lg font-semibold text-white">Order summary</h2>
+          <h2 id="summary-heading" class="text-lg font-semibold text-white ">Order summary</h2>
 
           <dl class="mt-6 space-y-4">
             <div class="flex items-center justify-between">
@@ -217,4 +216,5 @@ const products = [
   },
 ]
 </script>
+
   
