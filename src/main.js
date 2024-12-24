@@ -10,6 +10,7 @@ import axios from 'axios';
 import './assets/index.css'
 import './style.css'
 
+
 const vuetify = createVuetify({
   components,
   directives,

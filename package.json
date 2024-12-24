@@ -12,14 +12,17 @@
     "@heroicons/vue": "^2.2.0",
     "axios": "^1.7.7",
     "core-js": "^3.8.3",
+    "toastify-js": "^1.12.0",
     "vue": "^3.2.13",
     "vue-router": "^4.4.5",
+    "vue3-toastify": "^0.2.8",
     "vuetify": "^3.7.0-beta.1",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@types/toastify-js": "^1.12.3",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
@@ -35,7 +38,7 @@
     "root": true,
     "env": {
       "node": true,
-      "browser": true 
+      "browser": true
     },
     "extends": [
       "plugin:vue/vue3-essential",
@@ -46,12 +49,12 @@
     },
     "rules": {
       "vue/multi-word-component-names": "off",
-      "no-undef": "warn" 
+      "no-undef": "warn"
     },
     "globals": {
       "process": "readonly",
       "module": "readonly",
-      "require": "readonly" 
+      "require": "readonly"
     }
   },
   "browserslist": [
