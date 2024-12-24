@@ -49,36 +49,11 @@
       </section>
 
       <!-- Featured section -->
-      <section aria-labelledby="social-impact-heading" class="mx-auto relative max-w-7xl px-4 pt-24 sm:px-6 sm:pt-32 lg:px-8">
-        <div
-      class="absolute inset-x-0 z-[20] -top-16 flex transform-gpu justify-center overflow-hidden blur-3xl"
-      aria-hidden="true"
-    >
-      <div
-        class="aspect-[1318/752] w-[82.375rem] flex-none bg-gradient-to-r from-[#80caff] to-[#4f46e5] opacity-25"
-        style="clip-path: polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)"
-      />
-    </div>
-        <div class="relative z-[40] overflow-hidden rounded-lg">
-          <div class="absolute inset-0">
-            <img src="https://tailwindui.com/plus/img/ecommerce-images/home-page-01-feature-section-01.jpg" alt="" class="size-full object-cover" />
-          </div>
-          <div class="relative bg-gray-900/75 px-6 py-32 sm:px-12 sm:py-40 lg:px-16">
-            <div class="relative mx-auto flex max-w-3xl flex-col items-center text-center">
-              <h2 id="social-impact-heading" class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                <span class="block sm:inline">Level up</span>
-                <span class="block sm:inline">your desk</span>
-              </h2>
-              <p class="mt-3 text-xl text-white">Make your desk beautiful and organized. Post a picture to social media and watch it get more likes than life-changing announcements. Reflect on the shallow nature of existence. At least you have a really nice desk setup.</p>
-              <a href="#" class="mt-8 block w-full rounded-md border border-transparent bg-emerald-500 px-8 py-3 text-base font-medium  hover:bg-emerald-600 sm:w-auto">Shop Workspace</a>
-            </div>
-          </div>
-        </div>
-      </section>
+    
 
       <!-- Collection section -->
-      <section aria-labelledby="collection-heading" class="mx-auto max-w-xl px-4 pt-24 sm:px-6 sm:pt-32 lg:max-w-7xl lg:px-8">
-        <h2 id="collection-heading" class="text-2xl font-bold tracking-tight ">Shop by Collection</h2>
+      <section aria-labelledby="collection-heading" class="mx-auto max-w-xl px-4 pt-24 mb-40 sm:px-6 sm:pt-32 lg:max-w-7xl lg:px-8">
+        <h2 id="collection-heading" class="text-2xl font-bold tracking-tight ">Top Competetions</h2>
         <p class="mt-4 text-base text-gray-400">Each season, we collaborate with world-class designers to create a collection inspired by the natural world.</p>
 
         <div class="mt-10 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0">
@@ -91,29 +66,7 @@
       </section>
 
       <!-- Featured section -->
-      <section aria-labelledby="comfort-heading" class="mx-auto relative max-w-7xl px-4 py-24 sm:px-6 sm:py-32 mt-10 lg:px-8">
-        <div
-      class="absolute inset-x-0 z-[20] -top-16 flex transform-gpu justify-center overflow-hidden blur-3xl"
-      aria-hidden="true"
-    >
-      <div
-        class="aspect-[1318/752] w-[82.375rem] flex-none bg-gradient-to-r from-[#80caff] to-[#4f46e5] opacity-25"
-        style="clip-path: polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)"
-      />
-    </div>
-        <div class="relative z-[40] overflow-hidden bg-white/5 ring-1 ring-emerald-400 rounded-lg md:rounded-3xl">
-          <div class="absolute inset-0">
-            <!-- <img src="https://tailwindui.com/plus/img/ecommerce-images/home-page-01-feature-section-02.jpg" alt="" class="size-full object-cover" /> -->
-          </div>
-          <div class="relative  backdrop-blur-3xl px-6 py-32 sm:px-12 sm:py-40 lg:px-16">
-            <div class="relative mx-auto flex max-w-3xl flex-col items-center text-center">
-              <h2 id="comfort-heading" class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Simple productivity</h2>
-              <p class="mt-3 text-xl text-white">Endless tasks, limited hours, a single piece of paper. Not really a haiku, but we're doing our best here. No kanban boards, burndown charts, or tangled flowcharts with our Focus system. Just the undeniable urge to fill empty circles.</p>
-              <a href="#" class="mt-8 block w-full rounded-md border border-transparent bg-emerald-500 px-8 py-3 text-base font-medium  hover:bg-emerald-600 sm:w-auto">Shop Focus</a>
-            </div>
-          </div>
-        </div>
-      </section>
+
     </main>
 
    <Footer />
