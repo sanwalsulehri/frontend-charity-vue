@@ -54,7 +54,7 @@
               type="button"
               class="rounded-md  bg-emerald-500  w-[90%] mx-4 hover:bg-emerald-800 mt-[0px] mb-[10px] px-4 sm:px-8 py-2 font-semibold text-white shadow-sm "
             >
-              Add to cart
+              View Competition
             </button>
           </div>
         </div>
