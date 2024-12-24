@@ -40,7 +40,7 @@
         <p class="mt-4 text-base text-gray-400">We have a lastest products collections.</p>
 
         <div class="mt-10 grid sm:grid-cols-2 gap-x-8 gap-y-40">
-          <a v-for="product in lastestProducts" :key="product.name" :href="product.href" class="group block  max-h-[70vh] h-full">
+          <a v-for="product in lastestProducts" :key="product.name" :href="product.href" class=" block group  max-h-[70vh] h-full">
   <img :src="product.imageSrc" :alt="product.imageAlt" class="w-full h-full rounded-lg object-cover group-hover:opacity-75" />
   <h3 class="mt-4 text-base font-semibold ">{{ product.name }}</h3>
   <p class="mt-2 text-sm text-gray-400">{{ product.description }}</p>
