@@ -1,5 +1,12 @@
 <template>
-  <v-container v-if="competition">
+  <Navbar />
+  <div v-if="competition" class="max-w-7xl mx-auto px-8">
+    <img :src="competitionImage" alt="Competition Image">
+    <i>{{'http://35.179.142.94:8000/storage/'+ competition.image_location}}</i>
+    <pre>{{competition}}</pre>
+  </div>
+  <!-- <v-container v-if="competition">
+   
     <v-card>
       <v-img
         :src="getImagePath(competition.image_location)"
@@ -25,7 +32,7 @@
         Add to Cart
       </v-btn>
     </v-card>
-  </v-container>
+  </v-container> -->
   <div v-else>
     Loading competition details...
   </div>
@@ -33,13 +40,19 @@
   
   <script>
   import axios from 'axios';
+  import Navbar from '../components/Navbar.vue';
   
   export default {
     name: 'CompetitionDetailPage',
+    components: {
+      Navbar
+    },
     data() {
       return {
-        competition: null,
-        quantity: 1
+        competition: {},
+        quantity: 1,
+        competitionImage: '',
+        
       };
     },
     mounted() {
@@ -47,6 +60,7 @@
     },
     methods: {
         addToCart() {
+          
         const competition = this.competition;
         this.$store.commit('addToCart', {
             competitionId: competition.id,
@@ -55,10 +69,11 @@
             quantity: this.quantity
         });
     },
+
       async fetchCompetition() {
         try {
           const response = await axios.get(`${process.env.VUE_APP_API_URL}/api/competition/${this.$route.params.id}`);
-          this.competition = response.data;
+          this.competition = response.data.competition;
         } catch (error) {
           console.error("Error fetching competition details:", error);
         }
@@ -66,6 +81,16 @@
       getImagePath(image) {
         return `${process.env.VUE_APP_API_URL}/storage/${image}`;
       }
+    },
+    watch: {
+        'competition.image_location': {
+            immediate: true,
+            handler(newValue) {
+                if (newValue) {
+                    this.competitionImage = this.getImagePath(newValue);
+                }
+            }
+        }
     }
   };
   </script>
