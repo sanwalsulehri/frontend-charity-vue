@@ -5,7 +5,7 @@
     <i>{{'http://35.179.142.94:8000/storage/'+ competition.image_location}}</i>
     <pre>{{competition}}</pre>
   </div>
-  <!-- <v-container v-if="competition">
+  <v-container v-if="competition">
    
     <v-card>
       <v-img
@@ -32,7 +32,7 @@
         Add to Cart
       </v-btn>
     </v-card>
-  </v-container> -->
+  </v-container> 
   <div v-else>
     Loading competition details...
   </div>
