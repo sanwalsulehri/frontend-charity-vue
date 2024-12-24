@@ -35,7 +35,7 @@
    
 
       <!-- latest -->
-      <section aria-labelledby="collection-heading" class="mx-auto px-4 my-16 sm:px-6 max-w-7xl lg:px-8">
+      <section aria-labelledby="collection-heading" class="mx-auto  my-16 px-4 sm:px-6 max-w-7xl lg:px-8">
         <h2 id="collection-heading" class="text-2xl font-bold tracking-tight ">Latest Products</h2>
         <p class="mt-4 text-base text-gray-400">We have a lastest products collections.</p>
 
