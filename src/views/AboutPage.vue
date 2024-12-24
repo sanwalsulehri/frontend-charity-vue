@@ -21,7 +21,7 @@
         <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
           <div class=" max-w-x gap-8 text-base/7 text-gray-300 lg:max-w-none lg:grid-cols-2">
             <div>
-              <p>There are so many ways to help in the world and buying a competition ticket mightn’t be the first to come to mind, however once we saw the potential to bring fun, sharing the wealth and charity together we just knew we had to create [CharityComps.com].</p>
+              <p>There are so many ways to help in the world and buying a competition ticket mightn’t be the first to come to mind, however once we saw the potential to bring fun, sharing the wealth and charity together we just knew we had to create CharityComps.com.</p>
               <p class="mt-2">Started in December 2024 [insert site name] is the go to site for goodwill towards men with a lucrative twist. We strive to give a percentage of all competition income to charities that will really make a positive change for the causes you care about such as […]. </p>
             </div>
             <div>
@@ -29,7 +29,7 @@
             </div>
           </div>
           <dl class="mt-16 grid grid-cols-1 gap-x-8 gap-y-12 sm:mt-20 sm:grid-cols-2 sm:gap-y-16 lg:mt-28 lg:grid-cols-4">
-            <div v-for="(stat, statIdx) in stats" :key="statIdx" class="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
+            <div v-for="(stat, statIdx) in stats" :key="statIdx" class="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6 ">
               <dt class="text-base/7 text-gray-300">{{ stat.label }}</dt>
               <dd class="text-3xl font-semibold tracking-tight text-white">{{ stat.value }}</dd>
             </div>
@@ -39,10 +39,12 @@
 
       <section aria-labelledby="collection-heading" class="mx-auto max-w-xl px-4 pt-10 sm:px-6 sm:pt-32 lg:max-w-7xl lg:px-8">
         <div class="mt-10 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0">
-          <a v-for="collection in collections" :key="collection.name" :href="collection.href" class="group block">
-            <img :src="collection.imageSrc" :alt="collection.imageAlt" class="aspect-3/2 w-full rounded-lg object-cover group-hover:opacity-75 lg:aspect-5/6" />
-            <h3 class="mt-4 text-base font-semibold ">{{ collection.name }}</h3>
-            <p class="mt-2 text-sm text-gray-400">{{ collection.description }}</p>
+          <a v-for="collection in collections" :key="collection.name" :href="collection.href" class="group block rounded-xl bg-white/5 backdrop-blur-3xl ring-emerald-500 ring-1 ">
+            <img :src="collection.imageSrc" :alt="collection.imageAlt" class=" w-full rounded-lg object-cover group-hover:opacity-75 h-[45vh] " />
+            <div class="px-4 pb-12 pt-4" >
+            <h3 class="mt-4 text-base font-semibold  ">{{ collection.name }}</h3>
+            <p class="mt-2 text-sm text-gray-400 ">{{ collection.description }}</p>
+          </div>
           </a>
         </div>
       </section>
