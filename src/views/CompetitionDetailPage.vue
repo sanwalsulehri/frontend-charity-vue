@@ -46,9 +46,9 @@
           >
             <h2 class="sr-only">Images</h2>
 
-            <div class="w-full h-full">
+            <div class="w-full h-full  overflow-hidden">
               <img
-                class="w-full h-full"
+                class="w-full object-cover rounded-lg h-full"
                 :src="getImagePath(competition.image_location)"
               />
             </div>
@@ -58,50 +58,7 @@
             <div>
               <!-- Color picker -->
 
-              <!-- Size picker -->
-              <div class="mt-8">
-                <div class="flex items-center justify-between">
-                  <h2 class="text-sm font-medium text-white">Size</h2>
-                  <a
-                    href="#"
-                    class="text-sm font-medium text-emerald-600 hover:text-emerald-500"
-                    >See sizing chart</a
-                  >
-                </div>
-
-                <fieldset aria-label="Choose a size" class="mt-2">
-                  <RadioGroup
-                    v-model="selectedSize"
-                    class="grid grid-cols-3 gap-3 sm:grid-cols-6"
-                  >
-                    <RadioGroupOption
-                      as="template"
-                      v-for="size in product.sizes"
-                      :key="size.name"
-                      :value="size"
-                      :disabled="!size.inStock"
-                      v-slot="{ active, checked }"
-                    >
-                      <div
-                        :class="[
-                          size.inStock
-                            ? 'cursor-pointer  focus:outline-hidden'
-                            : 'cursor-not-allowed opacity-25',
-                          active
-                            ? 'ring-2  ring-emerald-500 ring-offset-2'
-                            : '',
-                          checked
-                            ? 'border-transparent bg-emerald-600 text-white hover:bg-emerald-700'
-                            : ' bg-gray-900 text-white hover:bg-gray-50/10',
-                          'flex items-center justify-center rounded-md  px-3 py-3 borders text-sm font-medium uppercase sm:flex-1',
-                        ]"
-                      >
-                        {{ size.name }}
-                      </div>
-                    </RadioGroupOption>
-                  </RadioGroup>
-                </fieldset>
-              </div>
+              
 
 
               <!-- input -->
@@ -130,20 +87,7 @@
               </div>
             </div>
 
-            <div class="mt-8 borderT pt-8">
-              <h2 class="text-sm font-medium text-white">Fabric &amp; Care</h2>
-
-              <div class="mt-4">
-                <ul
-                  role="list"
-                  class="list-disc space-y-1 pl-5 text-sm/6 text-white marker:text-gray-300"
-                >
-                  <li v-for="item in product.details" :key="item" class="pl-2">
-                    {{ item }}
-                  </li>
-                </ul>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>

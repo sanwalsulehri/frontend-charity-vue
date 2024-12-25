@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <Navbar />
-
+ 
     <div
       class="absolute inset-x-0  -top-16 flex transform-gpu justify-center overflow-hidden blur-3xl"
       aria-hidden="true"
@@ -17,15 +17,15 @@
 
     <div class="bg-transparent z-[999]" >
     <div class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
-      <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl ">Shopping Cart</h1>
+      <h1 class="text-3xl font-bold tracking-tight text-gray-100 sm:text-4xl ">Shopping Cart</h1>
       <form  class="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16" >
         <section aria-labelledby="cart-heading" class="lg:col-span-7">
           <h2 id="cart-heading" class="sr-only">Items in your shopping cart</h2>
 
-          <ul    role="list" class="divide-y divide-emerald-500 border-b border-t border-emerald-500">
-            <li v-for="(product, productIdx) in products" :key="product.id" class="flex py-6 sm:py-10">
+          <ul    role="list" class="divide-y space-y-4 divide-emerald-500 border-b border-t border-emerald-500">
+            <li v-for="(product, productIdx) in cartItems" :key="product.competitionId" class="flex ring-1 rounded-sm ring-emerald-500 py-6 sm:py-10">
               <div class="shrink-0">
-                <img :src="product.imageSrc" :alt="product.imageAlt" class="size-24 rounded-md object-cover sm:size-48" />
+                <!-- <img :src="product.imageSrc" :alt="product.imageAlt" class="size-24 rounded-md object-cover sm:size-48" /> -->
               </div>
 
               <div class="ml-4 flex flex-1 flex-col justify-between sm:ml-6">
@@ -33,14 +33,11 @@
                   <div>
                     <div class="flex justify-between">
                       <h3 class="text-sm">
-                        <a :href="product.href" class="font-medium text-gray-700 hover:text-gray-800">{{ product.name }}</a>
+                        <a :href="product.href" class="font-medium text-2xl text-gray-300  ">{{ product.competitionName }}</a>
                       </h3>
                     </div>
-                    <div class="mt-1 flex text-sm">
-                      <p class="text-gray-500">{{ product.color }}</p>
-                      <p v-if="product.size" class="ml-4 border-l border-emerald-500 pl-4 text-gray-500">{{ product.size }}</p>
-                    </div>
-                    <p class="mt-1 text-sm font-medium text-gray-900">{{ product.price }}</p>
+                    
+                    <p class="mt-1 text-sm font-medium text-gray-900 underline text-white">{{ product.ticketPrice }}</p>
                   </div>
 
                   <div class="mt-4 sm:mt-0 sm:pr-9">
@@ -58,7 +55,7 @@
                       <ChevronDownIcon class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-white fill-white sm:size-4"/>
                     </div>
 
-                    <div class="absolute right-0 top-0">
+                    <div class="absolute right-4 top-0">
                       <button type="button" class="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500">
                         <span class="sr-only">Remove</span>
                         <XMarkIcon class="size-5" aria-hidden="true" />
@@ -67,11 +64,7 @@
                   </div>
                 </div>
 
-                <p class="mt-4 flex space-x-2 text-sm text-gray-700">
-                  <CheckIcon v-if="product.inStock" class="size-5 shrink-0 text-green-500" aria-hidden="true" />
-                  <ClockIcon v-else class="size-5 shrink-0 text-gray-300" aria-hidden="true" />
-                  <span>{{ product.inStock ? 'In stock' : `Ships in ${product.leadTime}` }}</span>
-                </p>
+              
               </div>
             </li>
           </ul>
@@ -161,6 +154,7 @@ import Navbar from '@/components/Navbar.vue';
 
 const store = useStore(); // Access the Vuex store
 const router = useRouter();
+
 
 // Access the getters from Vuex
 const cartItems = computed(() => store.getters.cartItems);
