@@ -50,12 +50,12 @@
               <p class="font-semibold underline decoration-emerald-500 underline-offset-2">${{ competition.ticket_price || "N/A" }}</p>
 
             </div>
-            <button @click="viewCompetition(competition.id)"
-              type="button"
-              class="rounded-md  bg-emerald-500  w-[90%] mx-4 hover:bg-emerald-800 mt-[0px] mb-[10px] px-4 sm:px-8 py-2 font-semibold text-white shadow-sm "
+            <router-link 
+              :to="`/competition/${competition.id}`"
+              class="rounded-md bg-emerald-500 w-[90%] mx-4 hover:bg-emerald-800 mt-[0px] mb-[10px] px-4 sm:px-8 py-2 font-semibold text-white shadow-sm block text-center"
             >
               View Competition
-            </button>
+            </router-link>
           </div>
         </div>
 
