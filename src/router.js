@@ -9,6 +9,7 @@ import CheckoutPage from './views/CheckoutPage.vue';
 import UserPage from './views/UserPage.vue';
 import AdminPanel from './views/AdminPanel.vue';
 import UserProfileAdmin from '@/components/UserProfileAdmin.vue';
+import OrdersPage from './views/OrdersPage.vue';
 import axios from "axios";
 
 
@@ -27,6 +28,7 @@ const routes = [
   { path: '/cart', component: CartPage },
   { path: '/checkout', component: CheckoutPage },
   { path: '/user', component: UserPage },
+  { path: '/orders', component: OrdersPage },
 
   {
     path: '/ccadmin',
