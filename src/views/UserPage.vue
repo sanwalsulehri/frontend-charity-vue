@@ -1,182 +1,196 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col
-        cols="12"
-        md="3"
-      >
-        <!-- Sidebar -->
-        <v-navigation-drawer app>
-          <v-list dense>
-            <v-list-item @click="goToOrders">
-              <v-list-item-content>
-                <v-list-item-title>Orders</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item @click="goToProfile">
-              <v-list-item-content>
-                <v-list-item-title>Edit Profile</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item
-              link
-              @click="logout"
-            >
-              <v-list-item-content>
-                <v-list-item-title>Logout</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-navigation-drawer>
-      </v-col>
+  <Sidebar>
+  
 
-      <v-col
-        cols="12"
-        md="9"
-      >
-        <!-- Profile Information Section -->
-        <v-card v-if="currentPage === 'profile'">
-          <v-card-title>Edit Profile</v-card-title>
-          <v-form
-            ref="form"
-            v-model="valid"
-          >
-            <v-text-field
-              v-model="user.name"
-              label="Name"
-              :rules="[rules.required]"
-              :disabled="!editing"
-            />
+ <main>
+        <h1 class="text-2xl font-semibold p-6">Edit Profile</h1>
 
-            <v-text-field
-              v-model="user.email"
-              label="Email"
-              :rules="[rules.required, rules.email]"
-              :disabled="!editing"
-            />
+        <header class="border-b border-white/5">
+          <!-- Secondary navigation -->
+          <nav class="flex overflow-x-auto py-4">
+            <ul role="list" class="flex min-w-full flex-none gap-x-6 px-4 text-sm/6 font-semibold text-gray-400 sm:px-6 lg:px-8">
+              <li v-for="item in secondaryNavigation" :key="item.name">
+                <a :href="item.href" :class="item.current ? 'text-yellow-400' : ''">{{ item.name }}</a>
+              </li>
+            </ul>
+          </nav>
+        </header>
 
-            <v-text-field
-              v-model="user.street_address"
-              label="Street Address"
-              :disabled="!editing"
-            />
+        <!-- Settings forms -->
+        <div class="divide-y divide-white/5">
+          <div class="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
+            <div>
+              <h2 class="text-base/7 font-semibold text-white">Personal Information</h2>
+              <p class="mt-1 text-sm/6 text-gray-400">Use a permanent address where you can receive mail.</p>
+            </div>
 
-            <v-text-field
-              v-model="user.town_city"
-              label="Town/City"
-              :disabled="!editing"
-            />
+            <form @submit.prevent="saveProfile" class="md:col-span-2">
+              <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
+                
 
-            <v-text-field
-              v-model="user.postcode"
-              label="Postcode"
-              :disabled="!editing"
-            />
+                <div class="sm:col-span-full">
+                  <label for="first-name" class="block text-sm/6 font-medium text-white">Name</label>
+                  <div class="mt-2">
+                    <input type="text" v-model="user.name" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-500 sm:text-sm/6" />
+                  </div>
+                </div>
+ 
 
-            <v-text-field
-              v-model="user.phone"
-              label="Phone"
-              :disabled="!editing"
-            />
+                <div class="col-span-full">
+                  <label for="email" class="block text-sm/6 font-medium text-white">Email address</label>
+                  <div class="mt-2">
+                    <input id="email" v-model="user.email" name="email" type="email" autocomplete="email" class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-500 sm:text-sm/6" />
+                  </div>
+                </div>
 
-            <!-- Edit/Save Buttons -->
-            <v-btn
-              v-if="!editing"
-              color="primary"
-              @click="toggleEdit"
-            >
-              Edit
-            </v-btn>
-            <v-btn
-              v-if="editing"
-              color="success"
-              :disabled="!valid"
-              @click="saveProfile"
-            >
-              Save
-            </v-btn>
-          </v-form>
-        </v-card>
+                <div class="col-span-full">
+                  <label for="username" class="block text-sm/6 font-medium text-white">Phone</label>
+                  <div class="mt-2">
+                    <div class="flex items-center rounded-md bg-white/5 pl-3 outline-1 -outline-offset-1 outline-white/10 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-yellow-500">
+                       
+                      <input v-model="user.phone" type="phone" name="username" id="username" class="block min-w-0 grow bg-transparent py-1.5 pr-3 pl-1 text-base text-white placeholder:text-gray-500 focus:outline-none sm:text-sm/6" placeholder="Phone" />
+                    </div>
+                  </div>
+                </div>
 
-        <!-- Orders Information Section -->
-        <orders-page v-if="currentPage === 'orders'" />
-      </v-col>
-    </v-row>
-  </v-container>
+                <div class="col-span-full">
+                  <label for="username" class="block text-sm/6 font-medium text-white">Street Address</label>
+                  <div class="mt-2">
+                    <div class="flex items-center rounded-md bg-white/5 pl-3 outline-1 -outline-offset-1 outline-white/10 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-yellow-500">
+              
+                      <input v-model="user.street_address" type="text" name="username" id="username" class="block min-w-0 grow bg-transparent py-1.5 pr-3 pl-1 text-base text-white placeholder:text-gray-500 focus:outline-none sm:text-sm/6" placeholder="Street Address" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-span-full">
+                  <label for="username" class="block text-sm/6 font-medium text-white">Town City</label>
+                  <div class="mt-2">
+                    <div class="flex items-center rounded-md bg-white/5 pl-3 outline-1 -outline-offset-1 outline-white/10 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-yellow-500">
+                      
+                      <input v-model="user.town_city" type="text" name="username" id="username" class="block min-w-0 grow bg-transparent py-1.5 pr-3 pl-1 text-base text-white placeholder:text-gray-500 focus:outline-none sm:text-sm/6" placeholder="Town" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-span-full">
+                  <label for="username" class="block text-sm/6 font-medium text-white">Postcode</label>
+                  <div class="mt-2">
+                    <div class="flex items-center rounded-md bg-white/5 pl-3 outline-1 -outline-offset-1 outline-white/10 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-yellow-500">
+                      
+                      <input v-model="user.postcode" type="text" name="username" id="username" class="block min-w-0 grow bg-transparent py-1.5 pr-3 pl-1 text-base text-white placeholder:text-gray-500 focus:outline-none sm:text-sm/6" placeholder="Postcode" />
+                    </div>
+                  </div>
+                </div>
+
+               
+              </div>
+
+              <div class="mt-8 flex">
+                <button type="submit" class="rounded-md bg-yellow-500 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-yellow-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500">Edit</button>
+              </div>
+            </form>
+          </div>
+
+         
+
+      
+        </div>
+      </main>
+ 
+  </Sidebar>
+
+   
 </template>
 
-<script>
+<script setup>
+import { ref, reactive, onMounted } from 'vue';
 import axios from 'axios';
 import OrdersPage from './OrdersPage.vue';
+ 
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+import Sidebar from '@/layout/Sidebar.vue';
+ 
+// Components
+// const components = { OrdersPage };
 
-export default {
-  components: {
-    OrdersPage,
-  },
-  data() {
-    return {
-      user: {
-        name: '',
-        email: '',
-        street_address: '',
-        town_city: '',
-        postcode: '',
-        phone: '',
-      },
-      valid: true,
-      editing: false,
-      currentPage: 'profile', // Tracks the current page (profile or orders)
-      rules: {
-        required: (value) => !!value || 'Required.',
-        email: (value) => /.+@.+\..+/.test(value) || 'E-mail must be valid.',
-      },
-    };
-  },
-  mounted() {
-    this.fetchUserProfile();
-  },
-  methods: {
-    fetchUserProfile() {
-      axios
-        .get(`${process.env.VUE_APP_API_URL}/api/user/profile`)
-        .then((response) => {
-          this.user = response.data;
-        })
-        .catch((error) => {
-          console.error('There was an error fetching the profile:', error);
-        });
-    },
-    toggleEdit() {
-      this.editing = !this.editing;
-    },
-    saveProfile() {
-      axios
-        .put(`${process.env.VUE_APP_API_URL}/api/user/profile`, this.user)
-        .then(() => {
-          this.editing = false;
-          alert('Profile updated successfully');
-        })
-        .catch((error) => {
-          console.error('There was an error updating the profile:', error);
-        });
-    },
-    goToOrders() {
-      this.currentPage = 'orders';
-    },
-    goToProfile() {
-      this.currentPage = 'profile';
-    },
-    logout() {
+// Reactive user profile data
+const user = reactive({
+  name: '',
+  email: '',
+  street_address: '',
+  town_city: '',
+  postcode: '',
+  phone: '',
+});
 
-      localStorage.removeItem('auth_token');
+const valid = ref(true);
+const editing = ref(false);
+const currentPage = ref('profile'); // Tracks the current page (profile or orders)
 
-      this.$store.dispatch('logout');
-
-      this.$router.push('/login');
-    },
-  },
+// Validation rules
+const rules = {
+  required: (value) => !!value || 'Required.',
+  email: (value) => /.+@.+\..+/.test(value) || 'E-mail must be valid.',
 };
+
+// Router and Store
+const router = useRouter();
+const store = useStore();
+
+// Fetch User Profile
+const fetchUserProfile = async () => {
+  try {
+   
+    const response = await axios.get(`http://35.179.142.94:8000/api/user/profile`);
+    Object.assign(user, response.data); // Merge fetched data into the `user` object
+  } catch (error) {
+    console.error('There was an error fetching the profile:', error);
+  }
+};
+
+// Toggle Edit Mode
+const toggleEdit = () => {
+  editing.value = !editing.value;
+};
+
+// Save Profile
+const saveProfile = async () => {
+  try {
+ 
+    await axios.put(`http://35.179.142.94:8000/api/user/profile`, user);
+    editing.value = false;
+    alert('Profile updated successfully');
+  } catch (error) {
+    console.error('There was an error updating the profile:', error);
+  }
+};
+
+// Navigation Functions
+const goToOrders = () => {
+  currentPage.value = 'orders';
+};
+
+const goToProfile = () => {
+  currentPage.value = 'profile';
+};
+
+// Logout
+const logout = () => {
+  localStorage.removeItem('auth_token');
+  store.dispatch('logout');
+  router.push('/auth');
+};
+
+// Fetch user profile on mount
+onMounted(() => {
+  fetchUserProfile();
+});
+
+console.log(user, logout, goToProfile,goToOrders,saveProfile,toggleEdit,fetchUserProfile,rules,valid,OrdersPage);
 </script>
+
 
 <style scoped>
 .v-container {

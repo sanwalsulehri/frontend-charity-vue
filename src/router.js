@@ -9,6 +9,9 @@ import CheckoutPage from './views/CheckoutPage.vue';
 import UserPage from './views/UserPage.vue';
 import AdminPanel from './views/AdminPanel.vue';
 import UserProfileAdmin from '@/components/UserProfileAdmin.vue';
+import OrdersPage from './views/OrdersPage.vue';
+import ThanksPage from './views/Thanks.vue';
+import SorryPage from './views/Sorry.vue';
 import axios from "axios";
 
 
@@ -22,12 +25,14 @@ const routes = [
     name: 'about',
     component: AboutPage
   },
-  { path: '/login', component: LoginPage },
+  { path: '/auth', component: LoginPage },
   { path: '/competitions', component: CompetitionsPage },
   { path: '/cart', component: CartPage },
   { path: '/checkout', component: CheckoutPage },
   { path: '/user', component: UserPage },
-
+  { path: '/orders', component: OrdersPage },
+  { path: '/thanks', component: ThanksPage },
+  { path: '/sorry', component: SorryPage },
   {
     path: '/ccadmin',
     name: 'AdminPanel',

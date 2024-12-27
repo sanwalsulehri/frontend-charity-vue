@@ -177,7 +177,7 @@ export default {
           router.push("/");
         } else {
           alert("Failed to verify admin status. Please try again.");
-          router.push("/login");
+          router.push("/auth");
         }
       }
     };

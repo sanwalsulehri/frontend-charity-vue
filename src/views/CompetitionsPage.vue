@@ -20,12 +20,12 @@
         <!-- Grid for Competitions -->
         <div
           v-if="competitions.length"
-          class="mt-12 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-5"
+          class="mt-12 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-5"
         >
           <div
             v-for="competition in competitions"
             :key="competition.id"
-            class="group overflow-hidden relative transition-all duration-400 bg-[#101828] ring-[1px] ring-emerald-500 rounded-lg "
+            class="group overflow-hidden relative transition-all duration-400 bg-[#101828] ring-[1px] ring-yellow-500 rounded-lg "
           >
             <div class="w-full h-fit overflow-hidden">
               <img
@@ -40,19 +40,19 @@
                 <h1 class="text-xl  capitalize font-semibold">{{ competition.name }}</h1>
                 <p class="mt-1 text-sm text-gray-400 min-h-[60px] line-clamp-3">{{ competition.description }}</p>
                 <div class="mt-2 text-gray-200 flex items-center gap-1 font-medium">Status:
-                  <div class="relative w-1.5 h-1.5 bg-green-500 rounded-full flex items-center justify-center">
-                    <div class="h-1.5 w-1.5 bg-green-500 animate-ping rounded-full"></div>
+                  <div class="relative w-1.5 h-1.5 bg-yellow-500 rounded-full flex items-center justify-center">
+                    <div class="h-1.5 w-1.5 bg-yellow-500 animate-ping rounded-full"></div>
                   </div>
                   {{ competition.status }}
                 </div>
                
               </div>
-              <p class="font-semibold underline decoration-emerald-500 underline-offset-2">${{ competition.ticket_price || "N/A" }}</p>
+              <p class="font-semibold underline decoration-yellow-500 underline-offset-2">${{ competition.ticket_price || "N/A" }}</p>
 
             </div>
             <router-link 
               :to="`/competition/${competition.id}`"
-              class="rounded-md bg-emerald-500 w-[90%] mx-4 hover:bg-emerald-800 mt-[0px] mb-[10px] px-4 sm:px-8 py-2 font-semibold text-white shadow-sm block text-center"
+              class="rounded-md bg-yellow-500 w-[90%] mx-4 hover:bg-yellow-800 mt-[0px] mb-[10px] px-4 sm:px-8 py-2 font-semibold text-white shadow-sm block text-center"
             >
               View Competition
             </router-link>
@@ -66,11 +66,13 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import Footer from "@/components/Footer.vue";
 
 import Navbar from "@/components/Navbar.vue";
 
@@ -81,6 +83,8 @@ const fetchCompetitions = async () => {
     const response = await axios.get(`${process.env.VUE_APP_API_URL}/api/competitions`);
     if (response.data && Array.isArray(response.data)) {
       competitions.value = response.data;
+      console.log(response.data,'res');
+      
     } else {
       console.error("Unexpected API response structure:", response.data);
     }

@@ -9,7 +9,7 @@
         style="clip-path: polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)"
       />
     </div>
-    <div class=" max-w-2xl mt-12 w-full h-full relative z-[9999] shadow-md ring-[1px] ring-emerald-500 bg-gray-900 text-white/5 text-white backdrop-blur-3xl px-5 py-6 rounded-xl mx-auto">
+    <div class=" max-w-2xl mt-12 w-full h-full relative z-[9999] shadow-md ring-[1px] ring-yellow-500 bg-gray-900 text-white/5 text-white backdrop-blur-3xl px-5 py-6 rounded-xl mx-auto">
       <form
         v-if="isRegistering"
         class="mt-6 "
@@ -33,7 +33,7 @@
                   required
                   type="text"
                   name="name"
-                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-emerald-600 sm:text-sm/6"
+                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-600 sm:text-sm/6"
                   placeholder="Your name"
                 >
               </div>
@@ -51,7 +51,7 @@
                   required
                   type="email"
                   name="email"
-                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-emerald-600 sm:text-sm/6"
+                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-600 sm:text-sm/6"
                   placeholder="Your email"
                 >
               </div>
@@ -69,7 +69,7 @@
                   required
                   type="text"
                   name="text"
-                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-emerald-600 sm:text-sm/6"
+                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-600 sm:text-sm/6"
                   placeholder="Street Address"
                 >
               </div>
@@ -88,7 +88,7 @@
                   required
                   type="text"
                   name="town"
-                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-emerald-600 sm:text-sm/6"
+                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-600 sm:text-sm/6"
                   placeholder="Town/City"
                 >
               </div>
@@ -108,7 +108,7 @@
                   required
                   type="text"
                   name="postcode"
-                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-emerald-600 sm:text-sm/6"
+                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-600 sm:text-sm/6"
                   placeholder="Postcode"
                 >
               </div>
@@ -128,7 +128,7 @@
                   required
                   type="type"
                   name="phone"
-                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-emerald-600 sm:text-sm/6"
+                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-600 sm:text-sm/6"
                   placeholder="Phone"
                 >
               </div>
@@ -148,7 +148,7 @@
                   required
                   type="password"
                   name="Password"
-                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-emerald-600 sm:text-sm/6"
+                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-600 sm:text-sm/6"
                   placeholder="Password"
                 >
               </div>
@@ -168,7 +168,7 @@
                   required
                   type="password"
                   name="Confirm Password"
-                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-emerald-600 sm:text-sm/6"
+                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-600 sm:text-sm/6"
                   placeholder="Confirm Password"
                 >
               </div>
@@ -178,11 +178,11 @@
 
 
             <button
-              :disabled="isSubmitting"
-              type="button"
-              class="rounded-md w-fit bg-emerald-600 hover:bg-emerald-800 px-4 sm:px-8 py-2 font-semibold text-white shadow-sm "
+              
+              type="submit"
+              class="rounded-md w-fit bg-yellow-600 hover:bg-yellow-800 px-4 sm:px-8 py-2 font-semibold text-white shadow-sm "
             >
-              Register
+             {{isRegistering ? 'Register' : 'Register'}}
             </button>
 
 
@@ -193,7 +193,7 @@
             >
               Already have an account? <a
                 href="#"
-                class="text-emerald-600 font-medium hover:underline"
+                class="text-yellow-600 font-medium hover:underline"
               >Login here</a>
             </h5>
           </div>
@@ -225,7 +225,7 @@
                   required
                   type="email"
                   name="email"
-                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-emerald-600 sm:text-sm/6"
+                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-600 sm:text-sm/6"
                   placeholder="Your email"
                 >
               </div>
@@ -246,7 +246,7 @@
                   required
                   type="password"
                   name="Password"
-                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-emerald-600 sm:text-sm/6"
+                  class="block w-full rounded-md bg-gray-900 text-white px-3 py-1.5 text-base  outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-600 sm:text-sm/6"
                   placeholder="Password"
                 >
               </div>
@@ -259,9 +259,10 @@
 
 
             <button
-              :disabled="isSubmitting"
-              type="button"
-               class="rounded-md w-fit bg-emerald-700 hover:bg-emerald-800 px-4 sm:px-8 py-2 font-semibold text-white shadow-sm "
+             
+            
+              type="submit"
+               class="rounded-md w-fit bg-yellow-700 hover:bg-yellow-800 px-4 sm:px-8 py-2 font-semibold text-white shadow-sm "
             >
               Login
             </button>
@@ -273,7 +274,7 @@
             >
               Don't have an account? <a
                 href="#"
-                class="text-emerald-600 font-medium hover:underline"
+                class="text-yellow-600 font-medium hover:underline"
               >Sign up</a>
             </h5>
           </div>
@@ -322,12 +323,15 @@ export default {
 
     // Handle registration
     const register = async () => {
+      alert('cool')
+
       if (form.value.password !== form.value.confirmPassword) {
         alert("Passwords do not match.");
         return;
       }
 
       isSubmitting.value = true;
+      isRegistering.value = true;
       try {
         const {
           name,
@@ -338,7 +342,7 @@ export default {
           phone,
           password,
         } = form.value;
-        await axios.post(`${process.env.VUE_APP_API_URL}/api/register`, {
+        await axios.post(`http://35.179.142.94:8000/api/register`, {
           name,
           email,
           password,
@@ -347,6 +351,8 @@ export default {
           postcode,
           phone,
         });
+      isRegistering.value = false;
+
 
         alert("Registration successful!");
         // Automatically log in after registration
@@ -358,6 +364,8 @@ export default {
         );
       } finally {
         isSubmitting.value = false;
+      isRegistering.value = false;
+
       }
     };
 
@@ -367,7 +375,7 @@ export default {
       try {
         const { email, password } = form.value;
         const { data } = await axios.post(
-          `${process.env.VUE_APP_API_URL}/api/login`,
+          `http://35.179.142.94:8000/api/login`,
           {
             email,
             password,

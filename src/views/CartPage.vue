@@ -18,12 +18,12 @@
     <div class="bg-transparent z-[999]" >
     <div class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
       <h1 class="text-3xl font-bold tracking-tight text-gray-100 sm:text-4xl ">Shopping Cart</h1>
-      <form  class="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16" >
+      <form @submit.prevent="checkout"  class="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16" >
         <section aria-labelledby="cart-heading" class="lg:col-span-7">
           <h2 id="cart-heading" class="sr-only">Items in your shopping cart</h2>
 
-          <ul    role="list" class="divide-y space-y-4 divide-emerald-500 border-b border-t border-emerald-500">
-            <li v-for="(product, productIdx) in cartItems" :key="product.competitionId" class="flex ring-1 rounded-sm ring-emerald-500 py-6 sm:py-10">
+          <ul    role="list" class="divide-y space-y-4 divide-yellow-500 relative border-b border-t border-yellow-500">
+            <li v-for="(product, productIdx) in cartItems" :key="product.competitionId" class="flex ring-1 rounded-sm ring-yellow-500 py-6 sm:py-10">
               <div class="shrink-0">
                 <!-- <img :src="product.imageSrc" :alt="product.imageAlt" class="size-24 rounded-md object-cover sm:size-48" /> -->
               </div>
@@ -42,7 +42,7 @@
 
                   <div class="mt-4 sm:mt-0 sm:pr-9">
                     <div class="grid w-full max-w-16 grid-cols-1">
-                      <select :name="`quantity-${productIdx}`" :aria-label="`Quantity, ${product.name}`" class="col-start-1 row-start-1 appearance-none rounded-md bg-white/5 backdrop-blur-3xl py-1.5 pl-3 pr-8 text-base text-white outline outline-1 -outline-offset-1 outline-emerald-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:ring-emerald-500 sm:text-sm/6">
+                      <select v-model="product.quantity" :name="`quantity-${productIdx}`" :aria-label="`Quantity, ${product.name}`" class="col-start-1 row-start-1 appearance-none rounded-md bg-white/5 backdrop-blur-3xl py-1.5 pl-3 pr-8 text-base text-white outline outline-1 -outline-offset-1 outline-yellow-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:ring-yellow-500 sm:text-sm/6">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -66,7 +66,14 @@
 
               
               </div>
+              <div class="absolute top-2 right-2">
+                <button @click="removeFromCart(product.competitionId)"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+                </button>
+               </div>
             </li>
+           
           </ul>
         </section>
 
@@ -74,39 +81,10 @@
         <section  aria-labelledby="summary-heading" class="mt-16 rounded-lg bg-white/5 backdrop-blur-3xl px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8">
           <h2 id="summary-heading" class="text-lg font-semibold text-white ">Order summary</h2>
 
-          <dl class="mt-6 space-y-4">
-            <div class="flex items-center justify-between">
-              <dt class="text-sm text-gray-300">Subtotal</dt>
-              <dd class="text-sm font-medium text-gray-300">$99.00</dd>
-            </div>
-            <div class="flex items-center justify-between border-t-[1px] border-emerald-500  pt-4">
-              <dt class="flex items-center text-sm text-gray-300">
-                <span>Shipping estimate</span>
-                <a href="#" class="ml-2 shrink-0 text-gray-300 hover:text-gray-500">
-                  <span class="sr-only">Learn more about how shipping is calculated</span>
-                  <QuestionMarkCircleIcon class="size-5" aria-hidden="true" />
-                </a>
-              </dt>
-              <dd class="text-sm font-medium text-gray-300">$5.00</dd>
-            </div>
-            <div class="flex items-center justify-between border-t-[1px] border-emerald-500 pt-4">
-              <dt class="flex text-sm text-gray-300">
-                <span>Tax estimate</span>
-                <a href="#" class="ml-2 shrink-0 text-gray-300 hover:text-gray-500">
-                  <span class="sr-only">Learn more about how tax is calculated</span>
-                  <QuestionMarkCircleIcon class="size-5" aria-hidden="true" />
-                </a>
-              </dt>
-              <dd class="text-sm font-medium text-gray-300">$8.32</dd>
-            </div>
-            <div class="flex items-center justify-between border-t-[1px] border-emerald-500 pt-4">
-              <dt class="text-base font-medium text-gray-300">Order total</dt>
-              <dd  class="text-base font-medium text-gray-300">$112.32{{ cartTotal }}</dd>
-            </div>
-          </dl>
+          
 
           <div class="mt-6">
-            <button  @click="checkout" type="submit" class="w-full rounded-md border border-transparent bg-emerald-500 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-gray-50">Checkout</button>
+            <button   type="submit" class="w-full rounded-md border border-transparent bg-yellow-500 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 focus:ring-offset-gray-50">Checkout {{ cartTotal }}$</button>
           </div>
         </section>
       </form>
@@ -117,7 +95,7 @@
 
 
 
-  <v-container>
+  <!-- <v-container>
     <h2>Your Cart</h2>
     <v-row
       v-for="item in cartItems"
@@ -143,7 +121,8 @@
     >
       Checkout
     </v-btn>
-  </v-container>
+  </v-container> -->
+  <Footer />
 </template>
 
 <script setup>
@@ -151,7 +130,7 @@ import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import Navbar from '@/components/Navbar.vue';
-
+import Footer from '@/components/Footer.vue';
 const store = useStore(); // Access the Vuex store
 const router = useRouter();
 
@@ -161,9 +140,9 @@ const cartItems = computed(() => store.getters.cartItems);
 const cartTotal = computed(() => store.getters.cartTotal);
 
 // Methods to commit mutations
-const updateCart = (item) => {
-  store.commit('addToCart', item);
-};
+// const updateCart = (item) => {
+//   store.commit('addToCart', item);
+// };
 const removeFromCart = (competitionId) => {
   store.commit('removeFromCart', competitionId);
 };

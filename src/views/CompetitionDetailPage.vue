@@ -21,7 +21,7 @@
             <div class="mt-4">
               <div class="">
                 Ticket Pool:
-                <span class="text-emerald-500">{{
+                <span class="text-yellow-500">{{
                   competition.ticket_pool
                 }}</span>
               </div>
@@ -30,10 +30,10 @@
             <div class="mt-2 text-gray-200 flex items-center gap-1 font-medium">
               Status:
               <div
-                class="relative w-1.5 h-1.5 bg-green-500 rounded-full flex items-center justify-center"
+                class="relative w-1.5 h-1.5 bg-yellow-500 rounded-full flex items-center justify-center"
               >
                 <div
-                  class="h-1.5 w-1.5 bg-green-500 animate-ping rounded-full"
+                  class="h-1.5 w-1.5 bg-yellow-500 animate-ping rounded-full"
                 ></div>
               </div>
               {{ competition.status }}
@@ -66,13 +66,13 @@
                 <h1 class=" font-medium text-white ">
                 Product Quantity
               </h1>
-              <input v-model="quantity" type="number" class="borders px-2 appearance-none py-2 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500" />
+              <input v-model="quantity" type="number" class="borders px-2 appearance-none py-2 rounded-lg outline-none focus:ring-2 focus:ring-yellow-500" />
                </div>
 
               <button
               @click="addToCart"
                 type="submit"
-                class="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-emerald-600 px-8 py-3 text-base font-medium text-white hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:outline-hidden"
+                class="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-yellow-600 px-8 py-3 text-base font-medium text-white hover:bg-yellow-700 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 focus:outline-hidden"
               >
                 Add to cart
               </button>
@@ -89,11 +89,43 @@
 
             
           </div>
+          
         </div>
       </div>
+   
+    </div>
+    <div class="max-w-7xl mx-auto">
+     
+
+      
+      <div class="">
+        <h1 class="text-3xl font-bold py-3">{{charity.name}} <span class="px-4 text-xs bg-yellow-500 rounded-md py-1">charity</span></h1>
+        <p class="text-sm">{{charity.description}}</p>
+      </div>
+      <h1 class="text-3xl pt-16">Remaining Tickets: <span class="px-4  bg-yellow-500 ml-2 text-lg rounded-md py-1.5">{{tickets_remaining}}</span></h1>
+
+ 
+<div class="bg-gray-800 p-4 rounded-md mt-8">
+  <h1 class="text-3xl font-bold pt-4">Instant Wins</h1>
+  <table class="min-w-full divide-y divide-gray-700" border="1" cellpadding="10">
+    <thead>
+      <tr>
+        <th  scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-0">ID</th>
+        <th  scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-0">Winning Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(values, id) in instant_wins" :key="id">
+        <td  class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{ id }}</td>
+        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ values[0] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
     </div>
   </div>
-
+  <Footer />
   
 </template>
 
@@ -103,6 +135,7 @@ import axios from "axios";
 import Navbar from "../components/Navbar.vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
+import Footer from "@/components/Footer.vue";
  
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
@@ -116,6 +149,7 @@ import 'toastify-js/src/toastify.css';
 // Reactive properties
 const competition = ref({});
 const quantity = ref(1);
+const instant_wins = ref({});
 const competitionImage = ref("");
  
 
@@ -154,13 +188,18 @@ const addToCart = () => {
 
   
 };
-
+const charity = ref({});
+const tickets_remaining = ref('');
 const fetchCompetition = async () => {
   try {
     const response = await axios.get(
       `${process.env.VUE_APP_API_URL}/api/competition/${route.params.id}`
     );
+    console.log(response.data);
+    charity.value =  response.data.charity;
+    instant_wins.value = response.data.instant_wins
     competition.value = response.data.competition;
+    tickets_remaining.value = response.data.tickets_remaining
   } catch (error) {
     console.error("Error fetching competition details:", error);
   }

@@ -1,5 +1,5 @@
 <template lang="">
-  <footer aria-labelledby="footer-heading" class="w-full">
+  <footer aria-labelledby="footer-heading" class="w-full mt-40">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <router-link to="/">
     <h2 id="footer-heading" class="text-xl font-semibold">CharityComps</h2>
@@ -74,7 +74,7 @@
             v-for="item in navigation"
             :key="item.name"
             :href="item.href"
-            class="text-emerald-400 hover:text-emerald-300"
+            class="text-yellow-400 hover:text-yellow-300"
           >
             <span class="sr-only">{{ item.name }}</span>
             <component :is="item.icon" class="size-6" aria-hidden="true" />
